@@ -16,4 +16,4 @@ def publish_messages(project, topic_name):
     print('Published messages.')
 
 
-publish_messages("ovation-development", "compute-sandbox")
+#publish_messages(,)
