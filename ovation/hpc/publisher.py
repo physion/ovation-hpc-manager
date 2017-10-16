@@ -1,6 +1,6 @@
 from google.cloud import pubsub_v1
 import time
-
+import json
 
 def publish_messages(project, topic_name):
     """Publishes multiple messages to a Pub/Sub topic."""
@@ -8,9 +8,11 @@ def publish_messages(project, topic_name):
     topic_path = publisher.topic_path(project, topic_name)
 
     for n in range(1, 10):
-        data = u'Message number {}'.format(n)
+        data = {"activity_id": n,
+                "user_id": 8,
+                "container_revision_id": 3}
         # Data must be a bytestring
-        data = data.encode('utf-8')
+        data = json.dumps(data)
         publisher.publish(topic_path, data=data)
 
     print('Published messages.')
