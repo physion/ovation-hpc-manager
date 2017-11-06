@@ -12,5 +12,7 @@ module load shared
 module load slurm/17.02.2
 module load singularity/2.3.1
 
-mount /local/ovation
+export SINGULARITY_BINDPATH="/local:/local"
+
 /cm/shared/sing-images/ubuntu_xenial.img example@email.com activity_id
+
