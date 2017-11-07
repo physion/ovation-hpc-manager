@@ -14,5 +14,5 @@ module load singularity/2.3.1
 
 export SINGULARITY_BINDPATH="/local:/local"
 
-/cm/shared/sing-images/ubuntu_xenial.img example@email.com apikey activity_id
+/cm/shared/sing-images/ubuntu_xenial.img example@email.com apitoken activity_id
 
