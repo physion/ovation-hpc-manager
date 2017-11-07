@@ -5,10 +5,10 @@ From: ubuntu:16.04
     apt-get -y update
     apt-get -y install python3-pip
     apt-get update
-    pip3 install ovation>=1.20.1
+    pip3 install ovation==1.21.0
     mkdir /local
     chmod 777 /local
 %runscript
 	ls -all /local/
 	mkdir -p /local/ovation/data/$2/
-	python3 -m ovation.cli -u "$1" download "$2" --output /local/ovation/data/$2/
+	python3 -m ovation.cli -u "$1" -t "$2" download "$3" --output /local/ovation/data/$2/
