@@ -12,7 +12,6 @@ module load shared
 module load slurm/17.02.2
 module load singularity/2.3.1
 
-export SINGULARITY_BINDPATH="/local:/local"
+/cm/shared/sing-images/ovation_download_files.img "example@.com" api_token activity_id
 
-/cm/shared/sing-images/ubuntu_xenial.img example@email.com apitoken activity_id
 

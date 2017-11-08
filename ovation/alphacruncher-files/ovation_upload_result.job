@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --job-name=s_aws
+#SBATCH --output=s_aws_out_%j.out
+#SBATCH --workdir=/local
+#SBATCH --partition=us-east-1
+#SBATCH --ntasks=1
+#SBATCH --time=10:00
+#SBATCH --mail-user=example@alphacruncher.com
+#SBATCH --mail-type=ALL
+
+echo "test hello"
+
