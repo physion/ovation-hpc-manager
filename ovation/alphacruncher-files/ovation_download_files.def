@@ -1,0 +1,13 @@
+BootStrap: docker
+From: ubuntu:16.04
+%post
+	echo "Installing extra packages..."
+    apt-get -y update
+    apt-get -y install python3-pip
+    apt-get update
+    pip3 install ovation==1.21.0
+    mkdir /local
+    chmod 777 /local
+%runscript
+	mkdir -p /local/ovation/data/$2/
+	python3 -m ovation.cli -t "$1" download "$2" --output /local/ovation/data/$2/

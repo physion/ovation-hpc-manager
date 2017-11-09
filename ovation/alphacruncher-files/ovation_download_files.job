@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH --job-name=s_aws
+#SBATCH --output=s_aws_out_%j.out
+#SBATCH --workdir=/local
+#SBATCH --partition=us-east-1
+#SBATCH --ntasks=1
+#SBATCH --time=10:00
+#SBATCH --mail-user=example@alphacruncher.com
+#SBATCH --mail-type=ALL
+
+module load shared
+module load slurm/17.02.2
+module load singularity/2.3.1
+
+
+export SINGULARITY_BINDPATH="/local:/local"
+/cm/shared/sing-images/ovation_download_files.img "$1" "$2"
+
+
