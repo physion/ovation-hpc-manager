@@ -8,5 +8,21 @@
 #SBATCH --mail-user=example@alphacruncher.com
 #SBATCH --mail-type=ALL
 
-echo "test hello"
+module load shared
+module load slurm/17.02.2
+module load singularity/2.3.1
+
+echo "test upload result"
+
+result= "/local/s_aws_out_$3.out"
+output_path= "/local/ovation/data/$2/"
+target_result= "${output_path}${result}"
+echo target_result
+echo result
+
+cp result target_result
+
+export SINGULARITY_BINDPATH="/local/ovation/data/$2/:/outputs"
+
+/cm/shared/sing-images/ovation_upload_result.img "$1" "$2"
 

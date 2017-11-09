@@ -10,4 +10,4 @@ From: ubuntu:16.04
     chmod 777 /local
 %runscript
 	mkdir -p /local/ovation/data/$2/
-	python3 -m ovation.cli -u "$1" -t "$2" download "$3" --output /local/ovation/data/$2/
+	python3 -m ovation.cli -t "$1" download "$2" --output /local/ovation/data/$2/
