@@ -1,0 +1,13 @@
+BootStrap: docker
+From: ubuntu:16.04
+%post
+    echo "Installing extra packages..."
+    apt-get -y update
+    apt-get -y install python3-pip
+    apt-get update
+    pip3 install ovation==1.21.2
+    mkdir /outputs
+    chmod 777 /outputs
+%runscript
+    
+    echo Hello world > /outputs/out.txt
