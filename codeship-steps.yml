@@ -8,8 +8,8 @@
 #  command: ./deploy_pypi.sh
 
 - name: Push to GCR
-  tag: ^(development)
-  service: indexer
+  tag: ^(development|master)
+  service: library
   type: push
   image_name: gcr.io/ovation-io/indexer
   image_tag: "{{ .Branch }}-{{ .Timestamp }}"
@@ -17,6 +17,6 @@
   dockercfg_service: gcr_dockercfg\
 
 - name: Deploy
-  tag: ^(development)
+  tag: ^(development|master)
   service: deployment
   command: "/bin/bash -c 'deploy/deploy.sh $CI_BRANCH'"
