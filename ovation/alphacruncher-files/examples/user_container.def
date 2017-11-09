@@ -1,13 +1,21 @@
 BootStrap: docker
 From: ubuntu:16.04
 %post
-    echo "Installing extra packages..."
-    apt-get -y update
-    apt-get -y install python3-pip
-    apt-get update
-    pip3 install ovation==1.21.2
+    # For outputs from your job. Contents of this folder are uploaded to Ovation activity's "outputs"
     mkdir /outputs
     chmod 777 /outputs
+    
+    # Contents of Ovation activity's "inputs"
+    mkdir /inputs
+    chmod 777 /inputs
+    
+    # Contents of Ovation activity's "associated files"
+    mkdir /related
+    chmod 777 /related
+    
+    # Un-comment these if you need access to the Ovation Python API from your job:
+    #apt-get -y update && apt-get -y install python3-pip
+    #pip3 install ovation==1.21.2
 %runscript
     
     echo Hello world > /outputs/out.txt
