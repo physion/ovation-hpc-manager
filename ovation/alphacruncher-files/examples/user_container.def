@@ -1,15 +1,15 @@
 BootStrap: docker
 From: ubuntu:16.04
 %post
-    # For outputs from your job. Contents of this folder are uploaded to Ovation activity's "outputs"
+    # For outputs from your job. Contents of this folder are uploaded to Ovation Activity's "outputs" when the job completes.
     mkdir /outputs
     chmod 777 /outputs
     
-    # Contents of Ovation activity's "inputs"
+    # Contents of Ovation Activity's "inputs"
     mkdir /inputs
     chmod 777 /inputs
     
-    # Contents of Ovation activity's "associated files"
+    # Contents of Ovation Activity's "associated files"
     mkdir /related
     chmod 777 /related
     
