@@ -27,6 +27,9 @@ spec:
     {{- end -}}
   {{- if .Values.ingress.tls }}
   tls:
-{{ toYaml .Values.ingress.tls | indent 4 }}
+    - secretName: {{ .Release.Name }}-tls
+      hosts:
+        {{ .Release.Name }}.ovation.io
+
   {{- end -}}
 {{- end -}}
