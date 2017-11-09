@@ -1,17 +1,12 @@
 BootStrap: docker
 From: ubuntu:16.04
 %post
-    # For outputs from your job. Contents of this folder are uploaded to Ovation Activity's "outputs" when the job completes.
-    mkdir /outputs
-    chmod 777 /outputs
-    
-    # Contents of Ovation Activity's "inputs"
-    mkdir /inputs
-    chmod 777 /inputs
-    
-    # Contents of Ovation Activity's "associated files"
-    mkdir /related
-    chmod 777 /related
+    # Will be bound to a folder containing:
+    # ./inputs: Contents of Ovation Activity's "inputs"
+    # ./related: Contents of Ovation Activity's "associated files"
+    # ./outputs: Files added here by your job will be uploaded to the Activity's outputs upon job completion
+    mkdir /data
+    chmod 777 /data
     
     # Un-comment these if you need access to the Ovation Python API from your job:
     #apt-get -y update && apt-get -y install python3-pip
