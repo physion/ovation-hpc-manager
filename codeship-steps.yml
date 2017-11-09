@@ -2,10 +2,10 @@
   service: library
   command: pytest
 
-- name: publish
-  tag: master
-  service: pypi
-  command: python setup.py bdist upload
+#- name: publish
+#  tag: master
+#  service: pypi
+#  command: ./deploy_pypi.sh
 
 - name: Push to GCR
   tag: ^(development)
