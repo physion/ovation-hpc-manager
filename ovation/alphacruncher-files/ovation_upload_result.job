@@ -21,3 +21,4 @@ export SINGULARITY_BINDPATH="/local/ovation/data/$2/outputs/:/outputs"
 
 /cm/shared/sing-images/ovation_upload_result.img "$1" "$2"
 
+rm -rf /local/ovation/data/$2/
