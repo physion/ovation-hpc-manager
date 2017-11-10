@@ -13,14 +13,9 @@ module load slurm/17.02.2
 module load singularity/2.3.1
 
 echo "test upload result"
+chmod 777 /local/s_aws_out_"$3".out
 
-result= "/local/s_aws_out_$3.out"
-output_path= "/local/ovation/data/$2/outputs"
-target_result= "${output_path}${result}"
-echo target_result
-echo result
-
-cp result target_result
+cp /local/s_aws_out_"$3".out /local/ovation/data/"$2"/outputs/s_aws_out_"$3".out
 
 export SINGULARITY_BINDPATH="/local/ovation/data/$2/outputs/:/outputs"
 

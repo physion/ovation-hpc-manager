@@ -8,4 +8,12 @@
 #SBATCH --mail-user=example@alphacruncher.com
 #SBATCH --mail-type=ALL
 
+module load shared
+module load slurm/17.02.2
+module load singularity/2.3.1
+
 echo "test user job $1"
+
+export SINGULARITY_BINDPATH="/local:/local"
+/cm/shared/sing-images/user_container.img "$1" "$2"
+
