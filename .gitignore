@@ -105,3 +105,4 @@ ENV/
 
 # Configuration
 *.env
+*.orig
