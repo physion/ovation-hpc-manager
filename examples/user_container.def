@@ -1,0 +1,18 @@
+BootStrap: docker
+From: ubuntu:16.04
+
+%post
+    # Will be bound to a folder containing:
+    # ./inputs: Contents of Ovation Activity's "inputs"
+    # ./related: Contents of Ovation Activity's "associated files"
+    # ./outputs: Files added here by your job will be uploaded to the Activity's outputs upon job completion
+    mkdir /data
+    chmod 777 /data
+
+    # Un-comment these if you need access to the Ovation Python API from your job:
+    #apt-get -y update && apt-get -y install python3-pip
+    #pip3 install ovation==1.21.2
+
+%runscript
+
+    echo Hello world > /data/outputs/out.txt
