@@ -10,7 +10,7 @@
 
 module load shared
 module load slurm/17.02.2
-module load singularity/2.3.1
+module load singularity/2.4
 
 echo "test upload result"
 chmod 777 /local/s_aws_out_"$3".out

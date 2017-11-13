@@ -10,10 +10,9 @@
 
 module load shared
 module load slurm/17.02.2
-module load singularity/2.3.1
+module load singularity/2.4
 
+echo "Running user container $2 with args $3"
 
-export SINGULARITY_BINDPATH="/local:/local"
-/cm/shared/sing-images/ovation_download_files.img "$1" "$2"
-
-
+export SINGULARITY_BINDPATH="/local/ovation/data/$1/:/data"
+/cm/shared/sing-images/$2 $3

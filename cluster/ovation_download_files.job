@@ -10,10 +10,8 @@
 
 module load shared
 module load slurm/17.02.2
-module load singularity/2.3.1
+module load singularity/2.4
 
-echo "test user job $1"
 
 export SINGULARITY_BINDPATH="/local:/local"
-/cm/shared/sing-images/user_container.img "$1" "$2"
-
+/cm/shared/sing-images/ovation_download_files.img "$1" "$2"
