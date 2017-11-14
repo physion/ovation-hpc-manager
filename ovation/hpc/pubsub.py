@@ -5,26 +5,14 @@ import uuid
 from google.cloud import pubsub
 
 
-def make_research_callback(submit_job,
-                           token_info=None,
-                           client_id=None,
-                           client_secret=None,
-                           auth_domain=None,
-                           audience=None,
-                           ovation_api=None):
+def make_research_callback(submit_job):
     def callback(message):
 
         try:
             logging.info('Starting: {}'.format(message.message_id))
             msg = json.loads(message.data.decode('utf-8'))
 
-            resp = submit_job(msg,
-                              token_info=token_info,
-                              client_id=client_id,
-                              client_secret=client_secret,
-                              auth_domain=auth_domain,
-                              audience=audience,
-                              api=ovation_api)
+            resp = submit_job(msg)
 
             logging.info('Complete: {}'.format(message.message_id))
             message.ack()

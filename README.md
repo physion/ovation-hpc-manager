@@ -2,13 +2,6 @@
 
 ## Environment
 
-### OAuth
-`OVATION_CLIENT_ID`
-`OVATION_CLIENT_SECRET`
-`OVATION_AUTH_DOMAIN`
-`OVATION_AUDIENCE`
-`OVATION_API_URL`
-
 ### PubSub
 `GOOGLE_CLOUD_PROJECT_ID`
 `PUBSUB_REQUESTS_TOPIC`
@@ -16,3 +9,10 @@
 
 ### Slurm
 `SLURM_JOB_QUEUE` (default: `"us-east-1"`)
+
+
+## Files
+
+### Slurm certificates
+
+### SSH keys
