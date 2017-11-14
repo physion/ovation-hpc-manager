@@ -1,1 +1,4 @@
 google-cloud-pubsub==0.29.0
+slurmpy==0.0.7
+paramiko>=2.3.1
+scp>=0.10.2
