@@ -1,1 +1,18 @@
-# ovation-hpc-manager
+# Ovation HPC Compute Manager
+
+## Environment
+
+### OAuth
+`OVATION_CLIENT_ID`
+`OVATION_CLIENT_SECRET`
+`OVATION_AUTH_DOMAIN`
+`OVATION_AUDIENCE`
+`OVATION_API_URL`
+
+### PubSub
+`GOOGLE_CLOUD_PROJECT_ID`
+`PUBSUB_REQUESTS_TOPIC`
+`PUBSUB_REQUEST_SUBSCRIPTION_NAME`
+
+### Slurm
+`SLURM_JOB_QUEUE` (default: `"us-east-1"`)

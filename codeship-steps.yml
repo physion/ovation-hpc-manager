@@ -1,15 +1,10 @@
 - name: tests
-  service: library
+  service: app
   command: pytest
-
-#- name: publish
-#  tag: master
-#  service: pypi
-#  command: ./deploy_pypi.sh
 
 - name: Push to GCR
   tag: ^(development|master)
-  service: library
+  service: app
   type: push
   image_name: gcr.io/ovation-io/indexer
   image_tag: "{{ .Branch }}-{{ .Timestamp }}"

@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  library:
+  app:
     build:
       image: ovation-hpc-manager
       dockerfile: Dockerfile
