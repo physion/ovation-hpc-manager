@@ -2,7 +2,7 @@ import logging
 import sys
 import os
 
-import ovation.hpc.system as system
+import hpc_manager.system as system
 
 if __name__ == '__main__':
     level = logging.DEBUG if 'DEBUG_LOG' in os.environ else logging.INFO

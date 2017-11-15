@@ -1,4 +1,4 @@
-import ovation.hpc.slurm as slurm
+import hpc_manager.slurm as slurm
 
 
 def test_submit_research_job_throws_message_exception_for_missing_attributes():

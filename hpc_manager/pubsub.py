@@ -1,3 +1,4 @@
+import copy
 import json
 import logging
 import uuid
@@ -12,24 +13,29 @@ def make_research_callback(submit_job,
                            auth_domain=None,
                            audience=None,
                            ovation_api=None):
+
+    token_info = copy.deepcopy(token_info)
+
     def callback(message):
 
         try:
             logging.info('Starting: {}'.format(message.message_id))
             msg = json.loads(message.data.decode('utf-8'))
 
-            resp = submit_job(msg,
-                              token_info=token_info,
-                              client_id=client_id,
-                              client_secret=client_secret,
-                              auth_domain=auth_domain,
-                              audience=audience,
-                              api=ovation_api)
+            job, updated_token_info = submit_job(msg,
+                                                 token_info=token_info,
+                                                 client_id=client_id,
+                                                 client_secret=client_secret,
+                                                 auth_domain=auth_domain,
+                                                 audience=audience,
+                                                 api=ovation_api)
 
             logging.info('Complete: {}'.format(message.message_id))
             message.ack()
 
-            return resp
+            token_info.update(updated_token_info)
+
+            return job
 
         except Exception as ex:
             logging.exception("Failed: {}".format(message.message_id))
@@ -56,7 +62,6 @@ def open_subscription(project_id, topic, subscription_name=None, callback=None):
         logging.info("Subscription {} already exists".format(subscription_path))
 
     subscriber.subscribe(subscription_path, callback)
-
 
 # def publish_messages(project, topic_name):
 #     """Publishes multiple messages to a Pub/Sub topic."""

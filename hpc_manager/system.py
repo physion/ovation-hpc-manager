@@ -1,7 +1,8 @@
-import ovation.hpc.config as config
-import ovation.hpc.pubsub as pubsub
+import hpc_manager.config as config
+import hpc_manager.pubsub as pubsub
 
-from ovation.hpc.slurm import submit_research_job
+from hpc_manager.slurm import submit_research_job
+
 
 def make_system():
     # PubSub client

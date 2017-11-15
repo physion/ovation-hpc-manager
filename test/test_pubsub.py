@@ -1,7 +1,7 @@
 import base64
 import json
 
-import ovation.hpc.pubsub as pubsub
+import hpc_manager.pubsub as pubsub
 
 from unittest.mock import Mock, sentinel, patch
 

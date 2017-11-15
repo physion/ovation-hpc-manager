@@ -1,4 +1,4 @@
-import ovation.hpc.config as config
+import hpc_manager.config as config
 import os
 
 
