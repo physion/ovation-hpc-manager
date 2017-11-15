@@ -1,6 +1,14 @@
 import logging
 
 
+class SlurmException(Exception):
+    pass
+
+
+class MessageException(Exception):
+    pass
+
+
 def submit_research_job(msg):
     """Handle pubsub message to submit a job.
     :param msg google.cloud.pubsub_v1.subscriber.message.Message
@@ -8,15 +16,15 @@ def submit_research_job(msg):
     """
 
     logging.info("Received message: {}".format(msg))
-    if ((not 'organization' in msg) or
-            (not 'id' in msg) or
-            (not 'type' in msg)):
-        # TODO error
-        return
 
-    org = msg['organization']
-    doc_id = msg['id']
-    doc_type = msg['type']
+    if ((not 'activity_id' in msg) or
+            (not 'image_rev' in msg)):
+        raise MessageException("Missing required message attributes")
+
+    activity_id = msg['activity_id']
+    image_rev = msg['image_rev']
+
+    upload
 
     job_response = ''
 
