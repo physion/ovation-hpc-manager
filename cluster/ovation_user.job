@@ -12,7 +12,7 @@ module load shared
 module load slurm/17.02.2
 module load singularity/2.4
 
-echo "Running user container $2 with args $3"
+echo "Running user container $2"
 
 export SINGULARITY_BINDPATH="/local/ovation/data/$1/:/data"
-/cm/shared/sing-images/$2 $3
+/cm/shared/sing-images/ovation/$2
