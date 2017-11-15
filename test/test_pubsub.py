@@ -8,21 +8,33 @@ from unittest.mock import Mock, sentinel, patch
 
 def test_submit_job_callback_submits_job():
     submit_job = Mock()
-    submit_job.return_value = sentinel.submit_response
+    submit_job.return_value = sentinel.submit_response, sentinel.token_info
 
     message = Mock()
     msg = {}
     message.data = json.dumps(msg).encode('utf-8')
 
     # Act
-    cb = pubsub.make_research_callback(submit_job)
+    cb = pubsub.make_research_callback(submit_job,
+                                       token_info=sentinel.token_info,
+                                       client_id=sentinel.client_id,
+                                       client_secret=sentinel.client_secret,
+                                       auth_domain=sentinel.auth_domain,
+                                       audience=sentinel.audience,
+                                       ovation_api=sentinel.ovation_api)
 
     result = cb(message)
 
     # Assert
-    submit_job.assert_called_once_with(msg)
+    submit_job.assert_called_once_with(msg,
+                                       token_info=sentinel.token_info,
+                                       client_id=sentinel.client_id,
+                                       client_secret=sentinel.client_secret,
+                                       auth_domain=sentinel.auth_domain,
+                                       audience=sentinel.audience,
+                                       api=sentinel.ovation_api)
 
-    assert result == sentinel.submit_response
+    assert result == (sentinel.submit_response, sentinel.token_info)
 
 
 @patch("google.cloud.pubsub.SubscriberClient")
