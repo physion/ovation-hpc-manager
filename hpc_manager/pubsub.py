@@ -14,16 +14,17 @@ def make_research_callback(submit_job,
                            audience=None,
                            ovation_api=None):
 
-    token_info = copy.deepcopy(token_info)
+    token_info = copy.deepcopy(token_info) if token_info else {}
 
     def callback(message):
+        local_token_info = copy.deepcopy(token_info) if (token_info is not None and len(token_info) > 0) else None
 
         try:
             logging.info('Starting: {}'.format(message.message_id))
             msg = json.loads(message.data.decode('utf-8'))
 
             job, updated_token_info = submit_job(msg,
-                                                 token_info=token_info,
+                                                 token_info=local_token_info,
                                                  client_id=client_id,
                                                  client_secret=client_secret,
                                                  auth_domain=auth_domain,
