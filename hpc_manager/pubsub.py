@@ -12,7 +12,10 @@ def make_research_callback(submit_job,
                            client_secret=None,
                            auth_domain=None,
                            audience=None,
-                           ovation_api=None):
+                           ovation_api=None,
+                           head_node='scc.alphacruncher.net',
+                           key_filename='/var/secret/id_rsa',
+                           host_key_file='/var/secret/known_hosts'):
 
     token_info = copy.deepcopy(token_info) if token_info else {}
 
@@ -29,7 +32,10 @@ def make_research_callback(submit_job,
                                                  client_secret=client_secret,
                                                  auth_domain=auth_domain,
                                                  audience=audience,
-                                                 api=ovation_api)
+                                                 api=ovation_api,
+                                                 head_node=head_node,
+                                                 key_filename=key_filename,
+                                                 host_key_file=host_key_file)
 
             logging.info('Complete: {}'.format(message.message_id))
             message.ack()

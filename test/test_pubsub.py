@@ -21,7 +21,10 @@ def test_submit_job_callback_submits_job():
                                        client_secret=sentinel.client_secret,
                                        auth_domain=sentinel.auth_domain,
                                        audience=sentinel.audience,
-                                       ovation_api=sentinel.ovation_api)
+                                       ovation_api=sentinel.ovation_api,
+                                       head_node=sentinel.head_node,
+                                       key_filename=sentinel.key_filename,
+                                       host_key_file=sentinel.host_key_file)
 
     result = cb(message)
 
@@ -32,7 +35,10 @@ def test_submit_job_callback_submits_job():
                                        client_secret=sentinel.client_secret,
                                        auth_domain=sentinel.auth_domain,
                                        audience=sentinel.audience,
-                                       api=sentinel.ovation_api)
+                                       api=sentinel.ovation_api,
+                                       head_node=sentinel.head_node,
+                                       key_filename=sentinel.key_filename,
+                                       host_key_file=sentinel.host_key_file)
 
     assert result == sentinel.submit_response
 

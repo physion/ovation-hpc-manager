@@ -18,8 +18,9 @@ def submit_research_job(msg,
                         auth_domain=None,
                         audience=None,
                         api=None,
-                        head_node='scc.alphacruncher.net',
-                        key_filename='/var/secret/id_rsa'):
+                        head_node=None,
+                        key_filename=None,
+                        host_key_file=None):
     """Handle pubsub message to submit a job.
     :param msg google.cloud.pubsub_v1.subscriber.message.Message
     :returns (job_response, token_info) : job_response as dict, token_info to pass to service.make_session
@@ -51,7 +52,8 @@ def submit_research_job(msg,
     client.connect(head_node,
                    key_filename=key_filename,
                    allow_agent=False,
-                   look_for_keys=False)
+                   look_for_keys=False,
+                   host_key_file=host_key_file)
 
     try:
         stdin, stdout, stderr = client.exec_command('~/core.sh {token} {activity_id} {image}'.format(token=token,
