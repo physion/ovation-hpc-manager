@@ -15,4 +15,4 @@ From: ubuntu:16.04
 
 %runscript
 
-    echo Hello world > /data/outputs/out.txt
+    cat /data/inputs/in.txt > /data/outputs/out.txt
