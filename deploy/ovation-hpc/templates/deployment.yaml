@@ -24,6 +24,9 @@ spec:
         - name: google-cloud-key
           secret:
             secretName: {{ .Release.Name }}-service-key-secret
+        - name: ssh-key
+          secret:
+            secretName: {{ .Release.Name }}-ssh-key-secret
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -43,6 +46,8 @@ spec:
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
+            - name: ssh-key
+              mountPath: /var/secrets/ssh
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
