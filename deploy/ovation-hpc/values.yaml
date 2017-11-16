@@ -27,6 +27,7 @@ config:
 secret:
   GCP_SERVICE_KEY_JSON: json
   SSH_ID_RSA: text
+  SSH_ID_RSA_PUB: text
   SSH_KNOWN_HOSTS: text
 kube-lego:
   config:
