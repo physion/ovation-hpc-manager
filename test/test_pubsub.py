@@ -24,7 +24,8 @@ def test_submit_job_callback_submits_job():
                                        ovation_api=sentinel.ovation_api,
                                        head_node=sentinel.head_node,
                                        key_filename=sentinel.key_filename,
-                                       host_key_file=sentinel.host_key_file)
+                                       host_key_file=sentinel.host_key_file,
+                                       ssh_username=sentinel.username)
 
     result = cb(message)
 
@@ -38,7 +39,8 @@ def test_submit_job_callback_submits_job():
                                        api=sentinel.ovation_api,
                                        head_node=sentinel.head_node,
                                        key_filename=sentinel.key_filename,
-                                       host_key_file=sentinel.host_key_file)
+                                       host_key_file=sentinel.host_key_file,
+                                       ssh_username=sentinel.username)
 
     assert result == sentinel.submit_response
 

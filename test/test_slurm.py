@@ -34,14 +34,16 @@ def test_submit_research_job_should_connect_to_head_node(make_session, ssh_clien
     slurm.submit_research_job(msg,
                               head_node=sentinel.head_node,
                               key_filename=sentinel.key_filename,
-                              host_key_file=sentinel.host_key_file)
+                              host_key_file=sentinel.host_key_file,
+                              ssh_username=sentinel.username)
 
     # Assert
     client.connect.assert_called_with(sentinel.head_node,
                                       key_filename=sentinel.key_filename,
                                       allow_agent=False,
                                       look_for_keys=False,
-                                      host_key_file=sentinel.host_key_file)
+                                      host_key_file=sentinel.host_key_file,
+                                      username=sentinel.username)
 
 
 @patch('paramiko.SSHClient')

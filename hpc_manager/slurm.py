@@ -20,7 +20,8 @@ def submit_research_job(msg,
                         api=None,
                         head_node=None,
                         key_filename=None,
-                        host_key_file=None):
+                        host_key_file=None,
+                        ssh_username=None):
     """Handle pubsub message to submit a job.
     :param msg google.cloud.pubsub_v1.subscriber.message.Message
     :returns (job_response, token_info) : job_response as dict, token_info to pass to service.make_session
@@ -53,7 +54,8 @@ def submit_research_job(msg,
                    key_filename=key_filename,
                    allow_agent=False,
                    look_for_keys=False,
-                   host_key_file=host_key_file)
+                   host_key_file=host_key_file,
+                   username=ssh_username)
 
     try:
         stdin, stdout, stderr = client.exec_command('~/core.sh {token} {activity_id} {image}'.format(token=token,

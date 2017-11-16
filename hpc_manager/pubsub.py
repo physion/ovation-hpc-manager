@@ -15,7 +15,8 @@ def make_research_callback(submit_job,
                            ovation_api=None,
                            head_node='scc.alphacruncher.net',
                            key_filename='/var/secret/id_rsa',
-                           host_key_file='/var/secret/known_hosts'):
+                           host_key_file='/var/secret/known_hosts',
+                           ssh_username='ovation'):
 
     token_info = copy.deepcopy(token_info) if token_info else {}
 
@@ -35,7 +36,8 @@ def make_research_callback(submit_job,
                                                  api=ovation_api,
                                                  head_node=head_node,
                                                  key_filename=key_filename,
-                                                 host_key_file=host_key_file)
+                                                 host_key_file=host_key_file,
+                                                 ssh_username=ssh_username)
 
             logging.info('Complete: {}'.format(message.message_id))
             message.ack()
