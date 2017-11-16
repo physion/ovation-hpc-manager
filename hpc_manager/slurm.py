@@ -1,5 +1,6 @@
 import logging
 import paramiko
+import hpc_manager
 import ovation.service as service
 
 
@@ -50,17 +51,19 @@ def submit_research_job(msg,
 
     logging.info("Connecting to head node")
     client = paramiko.SSHClient()
+    client.load_host_keys(host_key_file)
     client.connect(head_node,
                    key_filename=key_filename,
                    allow_agent=False,
                    look_for_keys=False,
-                   host_key_file=host_key_file,
                    username=ssh_username)
 
     try:
-        stdin, stdout, stderr = client.exec_command('~/core.sh {token} {activity_id} {image}'.format(token=token,
-                                                                                                     activity_id=activity_id,
-                                                                                             image=image_name))
+        cmd = '~/bin/{ver}/core.sh {token} {activity_id} {image}'
+        stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
+                                                               token=token,
+                                                               activity_id=activity_id,
+                                                               image=image_name))
         if stdout.channel.recv_exit_status() != 0:
             raise SlurmException(stderr.read())
 

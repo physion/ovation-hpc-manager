@@ -1,4 +1,6 @@
 import paramiko
+
+import hpc_manager
 import hpc_manager.slurm as slurm
 
 import ovation.session as session
@@ -38,11 +40,11 @@ def test_submit_research_job_should_connect_to_head_node(make_session, ssh_clien
                               ssh_username=sentinel.username)
 
     # Assert
+    client.load_host_keys.assert_called_with(sentinel.host_key_file)
     client.connect.assert_called_with(sentinel.head_node,
                                       key_filename=sentinel.key_filename,
                                       allow_agent=False,
                                       look_for_keys=False,
-                                      host_key_file=sentinel.host_key_file,
                                       username=sentinel.username)
 
 
@@ -73,9 +75,11 @@ def test_submit_research_job_should_submit_job(make_session, ssh_client):
     assert result == (sentinel.job_output, sentinel.token_info)
 
     # Assert
-    client.exec_command.assert_called_with('~/core.sh {token} {activity} {image}'.format(token=sentinel.token,
-                                                                                         activity=sentinel.activity_id,
-                                                                                         image=sentinel.image_name))
+    client.exec_command.assert_called_with(
+        '~/bin/{ver}/core.sh {token} {activity} {image}'.format(ver=hpc_manager.__version__,
+                                                                token=sentinel.token,
+                                                                activity=sentinel.activity_id,
+                                                                image=sentinel.image_name))
 
 
 @patch('paramiko.SSHClient')
