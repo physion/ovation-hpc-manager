@@ -1,6 +1,8 @@
 FROM python:3
 
-# RUN apt-get update -y &&  apt-get install -y slurm-client
+RUN apt-get update -y &&  apt-get install -y openvpn
+
+RUN touch /etc/openvpn/credentials
 
 # Set the WORKDIR to /app so all following commands run in /app
 WORKDIR /app

@@ -27,12 +27,15 @@ spec:
         - name: ssh-key
           secret:
             secretName: {{ .Release.Name }}-ssh-key-secret
+        - name: vpn-settings
+          secret:
+            secretName: {{ .Release.Name }}-vpn-settings-secret
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["gunicorn"]
-          args: ["hpc.app:application"]
+          command: ["/app/bin/startup.sh"]
+          args: ["/var/secrets/vpn/ovation.ovpn"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
 #          livenessProbe:
@@ -48,9 +51,12 @@ spec:
               mountPath: /var/secrets/google
             - name: ssh-key
               mountPath: /var/secrets/ssh
+            - name: vpn-settings
+              mountPath: /var/secrets/vpn
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
+            - name:
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
