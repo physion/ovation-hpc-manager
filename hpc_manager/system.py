@@ -8,7 +8,7 @@ from hpc_manager.slurm import submit_research_job
 
 def make_system():
     api = falcon.API()
-    api.add_route('/hpc_run', falcon.HTTP_200)
+    api.add_route('/status', falcon.HTTP_200)
     # PubSub client
     cb = pubsub.make_research_callback(submit_research_job,
                                        client_id=config.secret('OVATION_CLIENT_ID'),
