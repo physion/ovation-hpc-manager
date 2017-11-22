@@ -1,5 +1,6 @@
 import hpc_manager.config as config
 import hpc_manager.pubsub as pubsub
+import falcon
 
 from hpc_manager.slurm import submit_research_job
 
@@ -23,3 +24,7 @@ def make_system():
                              callback=cb)
 
     return None
+
+def make_api():
+    api = falcon.API()
+
