@@ -4,7 +4,7 @@
 - [x] add gunicorn -> falcon app for liveness/readiness probe
 - [x] update `startup.sh` to start falcon app
 - [x] update `make_system` to create & return api
-- [ ] update liveness probe with `initialDelaySeconds: 60`
+- [x] update liveness probe with `initialDelaySeconds: 60`
 
 ## VPN
 - [x] create vpn secret
