@@ -8,9 +8,9 @@
 
 ## VPN
 - [x] create vpn secret
-- [ ] download ovation.ovpn
-- [ ] modify ovpn and create credentials file
-- [ ] add ovpn and credentials text to `.Values.secret.(OVATION_OVPN|VPN_CREDENTIALS)`
+- [x] download ovation.ovpn
+- [x] modify ovpn and create credentials file
+- [x] add ovpn and credentials text to `.Values.secret.(OVATION_OVPN|VPN_CREDENTIALS)`
 
 ## API Key
 - Pass API key with request _or_
