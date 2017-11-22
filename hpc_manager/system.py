@@ -45,9 +45,7 @@ def make_api():
     threading.Thread(target=pubsub.open_subscription,
                      name='pubsub-subscription',
                      args=(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
-                           config.configuration('PUBSUB_REQUESTS_TOPIC'),
-                           config.configuration('PUBSUB_REQUEST_SUBSCRIPTION_NAME', None),
-                           cb),
+                           config.configuration('PUBSUB_REQUESTS_TOPIC')),
                      kwargs={
                          'subscription_name': config.configuration('PUBSUB_REQUEST_SUBSCRIPTION_NAME', None),
                          'callback': cb}).start()
