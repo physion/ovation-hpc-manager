@@ -38,13 +38,16 @@ spec:
           args: ["/var/secrets/vpn/ovation.ovpn"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: {{ .Values.service.internalPort }}
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: {{ .Values.service.internalPort }}
+              initialDelaySeconds: 20
+              periodSeconds: 15
+              timeoutSeconds: 1
           readinessProbe:
             httpGet:
-              path: /
+              path: /status
               port: {{ .Values.service.internalPort }}
           volumeMounts:
             - name: google-cloud-key

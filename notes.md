@@ -1,16 +1,16 @@
 # Notes
 
 ## Falcon
-- [ ] add gunicorn -> falcon app for liveness/readiness probe
-- [ ] update `startup.sh` to start falcon app
-- [ ] update `make_system` to create & return api
-- [ ] update liveness probe with `initialDelaySeconds: 60`
+- [x] add gunicorn -> falcon app for liveness/readiness probe
+- [x] update `startup.sh` to start falcon app
+- [x] update `make_system` to create & return api
+- [x] update liveness probe with `initialDelaySeconds: 60`
 
 ## VPN
 - [x] create vpn secret
-- [ ] download ovation.ovpn
-- [ ] modify ovpn and create credentials file
-- [ ] add ovpn and credentials text to `.Values.secret.(OVATION_OVPN|VPN_CREDENTIALS)`
+- [x] download ovation.ovpn
+- [x] modify ovpn and create credentials file
+- [x] add ovpn and credentials text to `.Values.secret.(OVATION_OVPN|VPN_CREDENTIALS)`
 
 ## API Key
 - Pass API key with request _or_

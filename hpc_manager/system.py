@@ -1,10 +1,14 @@
 import hpc_manager.config as config
 import hpc_manager.pubsub as pubsub
+import falcon
+import threading
 
 from hpc_manager.slurm import submit_research_job
 
 
 def make_system():
+    api = falcon.API()
+    api.add_route('/status', falcon.HTTP_200)
     # PubSub client
     cb = pubsub.make_research_callback(submit_research_job,
                                        client_id=config.secret('OVATION_CLIENT_ID'),
@@ -17,9 +21,14 @@ def make_system():
                                        host_key_file=config.configuration('KNOWN_HOSTS_FILE'),
                                        ssh_username=config.configuration('SSH_USERNAME'))
 
-    pubsub.open_subscription(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
-                             config.configuration('PUBSUB_REQUESTS_TOPIC'),
-                             subscription_name=config.configuration('PUBSUB_REQUEST_SUBSCRIPTION_NAME', None),
-                             callback=cb)
+    threading.Thread(target=pubsub.open_subscription,
+                     name='pubsub-subscription',
+                     args=(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
+                           config.configuration('PUBSUB_REQUESTS_TOPIC')),
+                     kwargs={
+                         'subscription_name': config.configuration('PUBSUB_REQUEST_SUBSCRIPTION_NAME', None),
+                         'callback': cb}).start()
 
-    return None
+    return api
+
+
