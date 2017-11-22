@@ -17,6 +17,6 @@
 - service access key +
 
 ## Callbacks
-- provide Google credentials.json to paramkiko -> core.sh -> last job
-- publish to pubsub from job success/failure
+- [ ] provide Google credentials.json to paramkiko -> core.sh -> last job
+- [ ] publish to pubsub from job success/failure
 
