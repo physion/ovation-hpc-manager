@@ -51,8 +51,8 @@ def test_submit_research_job_should_connect_to_head_node(make_session, ssh_clien
 @patch('paramiko.SSHClient')
 @patch('ovation.service.make_session')
 def test_submit_research_job_should_submit_job(make_session, ssh_client):
-    s = Mock(spec=session.Session)
-    make_session.return_value = (sentinel.token_info, s)
+    # s = Mock(spec=session.Session)
+    # make_session.return_value = (sentinel.token_info, s)
 
     client = Mock()
     ssh_client.return_value = client
@@ -72,7 +72,7 @@ def test_submit_research_job_should_submit_job(make_session, ssh_client):
                                        head_node=sentinel.head_node,
                                        key_filename=sentinel.key_filename)
 
-    assert result == (sentinel.job_output, sentinel.token_info)
+    assert result == (sentinel.job_output, {})
 
     # Assert
     client.exec_command.assert_called_with(

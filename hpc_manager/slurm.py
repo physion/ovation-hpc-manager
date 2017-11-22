@@ -41,13 +41,13 @@ def submit_research_job(msg,
     org = msg['organization']
     token = msg['token']
 
-    (updated_token_info, session) = service.make_session(token_info,
-                                                         organization=org,
-                                                         client_id=client_id,
-                                                         client_secret=client_secret,
-                                                         auth=auth_domain,
-                                                         audience=audience,
-                                                         api=api)
+    # (updated_token_info, session) = service.make_session(token_info,
+    #                                                      organization=org,
+    #                                                      client_id=client_id,
+    #                                                      client_secret=client_secret,
+    #                                                      auth=auth_domain,
+    #                                                      audience=audience,
+    #                                                      api=api)
 
     logging.info("Connecting to head node")
     client = paramiko.SSHClient()
@@ -67,11 +67,10 @@ def submit_research_job(msg,
         if stdout.channel.recv_exit_status() != 0:
             raise SlurmException(stderr.read())
 
-        return stdout.read(), updated_token_info
+        return stdout.read(), {}
 
     except paramiko.SSHException as ex:
         logging.exception(str(ex), exc_info=True)
         raise ex
     finally:
         client.close()
-
