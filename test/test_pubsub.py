@@ -56,7 +56,8 @@ def test_open_subscription_creates_subscription(SubscriberClient):
     pubsub.open_subscription(sentinel.project_id,
                              sentinel.topic,
                              subscription_name=sentinel.subscription_name,
-                             callback=sentinel.callback)
+                             callback=sentinel.callback,
+                             restart_on_failure=False)
 
     subscriber.topic_path.assert_called_with(sentinel.project_id, sentinel.topic)
 
@@ -71,13 +72,17 @@ def test_open_subscription_creates_subscription(SubscriberClient):
 def test_open_subscription_subscribes(SubscriberClient):
     subscriber = Mock()
     SubscriberClient.return_value = subscriber
+    subscription = Mock()
 
     subscriber.subscription_path.return_value = sentinel.subscription_path
     subscriber.topic_path.return_value = sentinel.topic_path
+    subscriber.subscribe.return_value = subscription
 
     pubsub.open_subscription(sentinel.project_id,
                              sentinel.topic,
                              subscription_name=sentinel.subscription_name,
-                             callback=sentinel.callback)
+                             callback=sentinel.callback,
+                             restart_on_failure=False)
 
-    subscriber.subscribe.assert_called_with(sentinel.subscription_path, sentinel.callback)
+    subscriber.subscribe.assert_called_with(sentinel.subscription_path)
+    subscription.open.assert_called_with(sentinel.callback)

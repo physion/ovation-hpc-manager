@@ -55,7 +55,7 @@ def make_research_callback(submit_job,
     return callback
 
 
-def open_subscription(project_id, topic, subscription_name=None, callback=None):
+def open_subscription(project_id, topic, subscription_name=None, callback=None, restart_on_failure=True):
     subscriber = pubsub.SubscriberClient()
     topic_path = subscriber.topic_path(project_id, topic)
 
@@ -70,7 +70,18 @@ def open_subscription(project_id, topic, subscription_name=None, callback=None):
     except BaseException:
         logging.info("Subscription {} already exists".format(subscription_path))
 
-    subscriber.subscribe(subscription_path, callback)
+    subscription = subscriber.subscribe(subscription_path)
+
+    while True:
+        try:
+            future = subscription.open(callback)
+            if restart_on_failure:
+                future.result()
+            else:
+                break
+        except Exception as ex:
+            logging.exception("PubSub subscription exception: {}".format(ex), exc_info=True)
+            subscription.close()
 
 # def publish_messages(project, topic_name):
 #     """Publishes multiple messages to a Pub/Sub topic."""
