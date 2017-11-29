@@ -20,7 +20,7 @@ echo "Setting Project ID $PROJECT_ID"
 gcloud config set project $GOOGLE_PROJECT_ID
 
 echo "Setting default timezone $DEFAULT_ZONE"
-gcloud config set compute/zone $GOOGLE_PROJECT_ID
+gcloud config set compute/zone $DEFAULT_ZONE
 
 # Install helm
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash

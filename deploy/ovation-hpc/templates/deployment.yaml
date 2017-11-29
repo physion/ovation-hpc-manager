@@ -59,7 +59,21 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
-            - name:
+            - name: PUBSUB_REQUESTS_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_REQUESTS_TOPIC
+            - name: PUBSUB_FAILURES_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_FAILURES_TOPIC
+            - name: PUBSUB_SUCCESSES_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_SUCCESSES_TOPIC
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
