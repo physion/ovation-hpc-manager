@@ -74,6 +74,11 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-config
                   key: PUBSUB_SUCCESSES_TOPIC
+            - name: PUBSUB_REQUEST_SUBSCRIPTION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_REQUEST_SUBSCRIPTION_NAME
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
