@@ -59,7 +59,7 @@ def submit_research_job(msg,
                    username=ssh_username)
 
     try:
-        cmd = '~/bin/{ver}/core.sh {token} {activity_id} {image}'
+        cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image}'
         stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
                                                                token=token,
                                                                activity_id=activity_id,

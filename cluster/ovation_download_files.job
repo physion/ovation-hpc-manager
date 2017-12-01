@@ -15,4 +15,5 @@ module load singularity/2.4
 
 export SINGULARITY_BINDPATH="/local:/local"
 /cm/shared/sing-images/ovation/ovation_download_files.img "$1" "$2"
+ls /local/ovation/data/$2/related/
 cp /local/ovation/data/$2/related/$3 /cm/shared/sing-images/ovation/$3

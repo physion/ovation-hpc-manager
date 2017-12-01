@@ -15,11 +15,14 @@ module load singularity/2.4
 echo "test upload result"
 chmod 777 /local/s_aws_out_"$3".out
 
+
 cp /local/s_aws_out_"$3".out /local/ovation/data/"$2"/outputs/s_aws_out_"$3".out
 
-export SINGULARITY_BINDPATH="/local/ovation/data/$2/outputs/:/outputs"
 
-/cm/shared/sing-images/ovation/ovation_upload_result.img "$1" "$2"
+export SINGULARITY_BINDPATH="/local/:/local"
+echo "run container"
+/cm/shared/sing-images/ovation/ovation_upload_result.img "$1" "$2" "$3"
+echo "exit container"
 
 rm -rf /local/ovation/data/$2/
 rm /cm/shared/sing-images/ovation/$4
