@@ -5,6 +5,8 @@ From: ubuntu:16.04
     apt-get -y update
     apt-get -y install python3-pip
     apt-get update
+    pip3 install ovation==1.22.0
+    pip3 install google-cloud-pubsub==0.29.0
     mkdir /local
     chmod 777 /local
 %environment
@@ -13,9 +15,6 @@ From: ubuntu:16.04
     PUBSUB_SUCCESSES_TOPIC="compute-successes-development"
     GOOGLE_CLOUD_PROJECT_ID="ovation-development"
 %runscript
-    echo "Installing requirements"
-    pip3 install -r /local/ovation/hpc-manager/requirements.txt
-    echo "Sending response"
     if [ -e /local/s_aws_err_"$3".out ]
     then
         python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py error -j "$3" -a "$2" -e "$(< /local/s_aws_err_"$3".out)"
