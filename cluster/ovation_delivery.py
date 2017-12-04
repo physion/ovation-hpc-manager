@@ -1,4 +1,4 @@
-import hpc_manager.config as config
+import config as config
 from google.cloud import pubsub as gc_pubsub
 import json
 import argparse
@@ -15,6 +15,7 @@ def send_result_error(args):
         "error_log": error_log
     }
     publisher = gc_pubsub.PublisherClient()
+    print(config.configuration('GOOGLE_CLOUD_PROJECT_ID'))
     topic_path = publisher.topic_path(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
                                       config.configuration('PUBSUB_FAILURES_TOPIC'))
 
@@ -50,4 +51,8 @@ def main():
     parser_success.add_argument('-j', '--job_id', help='Job id')
     parser_success.add_argument('-a', '--activity_id', help='Activity id')
     parser_success.set_defaults(func=send_result_success)
+    args = parser.parse_args()
+    args.func(args)
 
+if __name__ == '__main__':
+    main()
