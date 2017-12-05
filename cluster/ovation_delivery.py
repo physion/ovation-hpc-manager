@@ -14,12 +14,16 @@ def send_result_error(args):
         "activity": activity,
         "error_log": error_log
     }
+    data = json.dumps(message)
+    data = data.encode('utf-8')
     publisher = gc_pubsub.PublisherClient()
+    print(config.configuration('GOOGLE_APPLICATION_CREDENTIALS'))
     print(config.configuration('GOOGLE_CLOUD_PROJECT_ID'))
+    print(config.configuration('PUBSUB_FAILURES_TOPIC'))
     topic_path = publisher.topic_path(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
                                       config.configuration('PUBSUB_FAILURES_TOPIC'))
 
-    publisher.publish(topic_path, data=json.dumps(message))
+    publisher.publish(topic_path, data=data)
     return "send_result_error"
 
 
@@ -30,11 +34,13 @@ def send_result_success(args):
         "job_id": job_id,
         "activity": activity,
     }
+    data = json.dumps(message)
+    data = data.encode('utf-8')
     publisher = gc_pubsub.PublisherClient()
     topic_path = publisher.topic_path(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
                                       config.configuration('PUBSUB_SUCCESSES_TOPIC'))
 
-    publisher.publish(topic_path, data=json.dumps(message))
+    publisher.publish(topic_path, data=data)
     return "send_result_success"
 
 

@@ -15,6 +15,10 @@ module load singularity/2.4
 echo "test upload result"
 chmod 777 /local/s_aws_out_"$3".out
 
+export GOOGLE_APPLICATION_CREDENTIALS="/local/ovation/ovation_key.json"
+export PUBSUB_FAILURES_TOPIC="compute-failures-development"
+export PUBSUB_SUCCESSES_TOPIC="compute-successes-development"
+export GOOGLE_CLOUD_PROJECT_ID="ovation-io"
 
 cp /local/s_aws_out_"$3".out /local/ovation/data/"$2"/outputs/s_aws_out_"$3".out
 
