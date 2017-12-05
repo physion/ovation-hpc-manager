@@ -11,7 +11,7 @@ From: ubuntu:16.04
     chmod 777 /local
 %runscript
     echo "$GOOGLE_APPLICATION_CREDENTIALS"
-    if [ -e /local/s_aws_err_"$3".out ]
+    if [ -s /local/s_aws_err_"$3".out ]
     then
         python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py error -j "$3" -a "$2" -e "$(< /local/s_aws_err_"$3".out)"
         echo "$PUBSUB_FAILURES_TOPIC"
