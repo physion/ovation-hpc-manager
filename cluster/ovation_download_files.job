@@ -18,3 +18,4 @@ export SINGULARITY_BINDPATH="/local:/local"
 ls /local/ovation/data/$2/related/
 cp /local/ovation/data/$2/related/$3 /cm/shared/sing-images/ovation/$3
 chmod 777 /cm/shared/sing-images/ovation/$3
+rm -rf /local/ovation/data/$2/outputs/*
