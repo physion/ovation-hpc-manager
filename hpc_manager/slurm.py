@@ -1,7 +1,7 @@
 import logging
 import paramiko
-import config as config
-import pubsub as pubsub
+import hpc_manager.config as config
+import hpc_manager.pubsub as pubsub
 import ovation.service as service
 
 

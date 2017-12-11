@@ -2,12 +2,11 @@ import logging
 import sys
 import os
 import falcon
-import hpc_manager.system as system
 import hpc_manager.settings as settings
 import hpc_manager.pubsub as pubsub
 import hpc_manager.helper as helper
 import hpc_manager.system as system
-from slurm import submit_research_job
+from hpc_manager.slurm import submit_research_job
 
 level = logging.DEBUG if 'DEBUG_LOG' in os.environ else logging.INFO
 logging.basicConfig(stream=sys.stdout, level=level)
