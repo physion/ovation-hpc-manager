@@ -79,6 +79,26 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-config
                   key: PUBSUB_REQUEST_SUBSCRIPTION_NAME
+            - name: OVATION_AUTH_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: OVATION_AUTH_DOMAIN
+            - name: OVATION_AUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: OVATION_AUDIENCE
+            - name: OVATION_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: OVATION_CLIENT_ID
+            - name: OVATION_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: OVATION_CLIENT_SECRET
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
