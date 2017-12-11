@@ -1,8 +1,6 @@
 import logging
 import paramiko
-import hpc_manager.config as config
-import hpc_manager.pubsub as pubsub
-import ovation.service as service
+import hpc_manager
 import hpc_manager.settings as settings
 
 
@@ -40,7 +38,7 @@ def submit_research_job(msg,
     activity_id = msg[settings.ACTIVITY_ID]
     image_name = msg[settings.USER_IMAGE]
     org = msg[settings.ORGANIZATION]
-    token = config.configuration("DEFAULT_HPC_TOKEN")#msg['token']
+    token = msg['token'] #hpc_manager.config.configuration("DEFAULT_HPC_TOKEN")
 
     # (updated_token_info, session) = service.make_session(token_info,
     #                                                      organization=org,
@@ -61,7 +59,7 @@ def submit_research_job(msg,
 
     try:
         cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image}'
-        stdin, stdout, stderr = client.exec_command(cmd.format(ver=1.0,
+        stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
                                                                token=token,
                                                                activity_id=activity_id,
                                                                image=image_name))
