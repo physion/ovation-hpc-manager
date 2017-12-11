@@ -83,6 +83,17 @@ def open_subscription(project_id, topic, subscription_name=None, callback=None, 
             logging.exception("PubSub subscription exception: {}".format(ex), exc_info=True)
             subscription.close()
 
+
+def send_message(message, project_id, topic):
+    data = json.dumps(message)
+    data = data.encode('utf-8')
+    publisher = pubsub.PublisherClient()
+
+    topic_path = publisher.topic_path(project_id, topic)
+
+    publisher.publish(topic_path, data=data)
+
+
 # def publish_messages(project, topic_name):
 #     """Publishes multiple messages to a Pub/Sub topic."""
 #     publisher = pubsub.PublisherClient()
