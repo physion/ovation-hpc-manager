@@ -28,3 +28,9 @@ def make_system():
                          'callback': cb}).start()
 
 
+def send_message(message):
+    pubsub.send_message(message,
+                        config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
+                        config.configuration('PUBSUB_REQUESTS_TOPIC'))
+
+

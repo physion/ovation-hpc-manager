@@ -3,6 +3,7 @@ import paramiko
 import hpc_manager.config as config
 import hpc_manager.pubsub as pubsub
 import ovation.service as service
+import hpc_manager.settings as settings
 
 
 class SlurmException(Exception):
@@ -31,16 +32,15 @@ def submit_research_job(msg,
 
     logging.info("Received message: {}".format(msg))
 
-    if ((not 'activity_id' in msg) or
-            (not 'organization' in msg) or
-            (not 'image_name' in msg) or
-            (not 'token' in msg)):
+    if ((not settings.ACTIVITY_ID in msg) or
+            (not settings.ORGANIZATION in msg) or
+            (not settings.USER_IMAGE in msg)): #or (not 'token' in msg)
         raise MessageException("Missing required message attributes")
 
-    activity_id = msg['activity_id']
-    image_name = msg['image_name']
-    org = msg['organization']
-    token = msg['token']
+    activity_id = msg[settings.ACTIVITY_ID]
+    image_name = msg[settings.USER_IMAGE]
+    org = msg[settings.ORGANIZATION]
+    token = config.configuration("DEFAULT_HPC_TOKEN")#msg['token']
 
     # (updated_token_info, session) = service.make_session(token_info,
     #                                                      organization=org,
