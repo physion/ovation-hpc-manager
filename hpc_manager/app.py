@@ -7,6 +7,7 @@ import hpc_manager.pubsub as pubsub
 import hpc_manager.helper as helper
 import hpc_manager.system as system
 import hpc_manager.config as config
+import hpc_manager.middleware as middleware
 from hpc_manager.slurm import submit_research_job
 
 level = logging.DEBUG if 'DEBUG_LOG' in os.environ else logging.INFO
@@ -21,6 +22,8 @@ class MakeSystem(object):
 
 
 class HpcHandler(object):
+    @falcon.before(middleware.require_auth)
+    @falcon.before(middleware.max_body(64 * 1024))
     def on_post(self, req, resp):
         body = helper.req_json(req)
         self.require_body_parameter(body, settings.ACTIVITY_ID)
