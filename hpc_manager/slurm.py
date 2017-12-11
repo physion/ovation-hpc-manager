@@ -1,6 +1,7 @@
 import logging
 import paramiko
-import hpc_manager
+import config as config
+import pubsub as pubsub
 import ovation.service as service
 
 
@@ -60,7 +61,7 @@ def submit_research_job(msg,
 
     try:
         cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image}'
-        stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
+        stdin, stdout, stderr = client.exec_command(cmd.format(ver=1.0,
                                                                token=token,
                                                                activity_id=activity_id,
                                                                image=image_name))
