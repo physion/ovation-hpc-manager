@@ -6,6 +6,7 @@ import hpc_manager.settings as settings
 import hpc_manager.pubsub as pubsub
 import hpc_manager.helper as helper
 import hpc_manager.system as system
+import hpc_manager.config as config
 from hpc_manager.slurm import submit_research_job
 
 level = logging.DEBUG if 'DEBUG_LOG' in os.environ else logging.INFO
@@ -39,10 +40,10 @@ class HpcHandler(object):
         resp.status = falcon.HTTP_201
 
 
-api = falcon.API()
-api.add_route('/make_system', MakeSystem())
+application = falcon.API()
+application.add_route('/make_system', MakeSystem())
 
 
 if __name__ == '__main__':
-    httpd = falcon.simple_server.make_server('127.0.0.1', 8000, api)
+    httpd = falcon.simple_server.make_server('127.0.0.1', 8000, application)
     httpd.serve_forever()
