@@ -99,6 +99,11 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-secret
                   key: OVATION_CLIENT_SECRET
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: JWT_SECRET
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
