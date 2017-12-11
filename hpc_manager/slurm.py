@@ -38,7 +38,7 @@ def submit_research_job(msg,
     activity_id = msg[settings.ACTIVITY_ID]
     image_name = msg[settings.USER_IMAGE]
     org = msg[settings.ORGANIZATION]
-    token = config.configuration("DEFAULT_HPC_TOKEN") #msg['token']
+    token = hpc_manager.config.configuration("DEFAULT_HPC_TOKEN") #msg['token']
 
     # (updated_token_info, session) = service.make_session(token_info,
     #                                                      organization=org,
