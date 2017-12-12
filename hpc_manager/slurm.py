@@ -59,8 +59,8 @@ def submit_research_job(msg,
                    username=ssh_username)
 
     try:
-        #cmd = 'ssh us-east-1-cnode001'
-        #stdin, stdout, stderr = client.exec_command(cmd)
+        cmd = '~/bin/{ver}/ovation_helper.sh'
+        stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__))
         #if stdout.channel.recv_exit_status() != 0:
         #    raise SlurmException(stderr.read())
 
