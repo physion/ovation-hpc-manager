@@ -48,6 +48,7 @@ def submit_research_job(msg,
     #                                                      audience=audience,
     #                                                      api=api)
 
+
     logging.info("Connecting to head node")
     client = paramiko.SSHClient()
     client.load_host_keys(host_key_file)
@@ -58,6 +59,11 @@ def submit_research_job(msg,
                    username=ssh_username)
 
     try:
+        #cmd = 'ssh us-east-1-cnode001'
+        #stdin, stdout, stderr = client.exec_command(cmd)
+        #if stdout.channel.recv_exit_status() != 0:
+        #    raise SlurmException(stderr.read())
+
         cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image}'
         stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
                                                                token=token,
