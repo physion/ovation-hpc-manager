@@ -13,7 +13,11 @@ module load shared
 module load slurm/17.02.2
 module load singularity/2.4
 
+ACTIVITY_UUID=$1
+USER_IMAGE=$2
+FIRST_JOB=$3
+
 echo "Running user container $2"
 
-export SINGULARITY_BINDPATH="/local/ovation/data/$1/:/data"
-/cm/shared/sing-images/ovation/$2
+export SINGULARITY_BINDPATH="/local/ovation/data/$USER_IMAGE/:/data"
+/cm/shared/sing-images/ovation/$FIRST_JOB/$USER_IMAGE

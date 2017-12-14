@@ -12,21 +12,27 @@ module load shared
 module load slurm/17.02.2
 module load singularity/2.4
 
+API_TOKEN=$1
+ACTIVITY_UUID=$2
+SECOND_JOB=$3
+USER_IMAGE=$4
+FIRST_JOB=$5
+
 echo "test upload result"
-chmod 777 /local/s_aws_out_"$3".out
+chmod 777 /local/s_aws_out_"$SECOND_JOB".out
 
 export GOOGLE_APPLICATION_CREDENTIALS="/local/ovation/ovation_credentials.json"
 export PUBSUB_FAILURES_TOPIC="compute-failures-development"
 export PUBSUB_SUCCESSES_TOPIC="compute-successes-development"
 export GOOGLE_CLOUD_PROJECT_ID="ovation-io"
 
-cp /local/s_aws_out_"$3".out /local/ovation/data/"$2"/outputs/s_aws_out_"$3".out
+cp /local/s_aws_out_"$SECOND_JOB".out /local/ovation/data/"$ACTIVITY_UUID"/outputs/s_aws_out_"$SECOND_JOB".out
 
 
 export SINGULARITY_BINDPATH="/local/:/local"
 echo "run container"
-/cm/shared/sing-images/ovation/ovation_upload_result.img "$1" "$2" "$3"
+/cm/shared/sing-images/ovation/ovation_upload_result.img "$API_TOKEN" "$ACTIVITY_UUID" "$SECOND_JOB"
 echo "exit container"
 
-rm -rf /local/ovation/data/$2/
-rm /cm/shared/sing-images/ovation/$4
+rm -rf /local/ovation/data/$ACTIVITY_UUID/
+rm /cm/shared/sing-images/ovation/$FIRST_JOB/$USER_IMAGE
