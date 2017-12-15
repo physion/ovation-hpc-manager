@@ -3,7 +3,6 @@ import sys
 import os
 import falcon
 import hpc_manager.settings as settings
-import hpc_manager.pubsub as pubsub
 import hpc_manager.helper as helper
 import hpc_manager.controller as controller
 import hpc_manager.middleware as middleware
