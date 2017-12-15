@@ -16,7 +16,7 @@ def send_result(**args):
 
     message['job_id'] = args.get('job_id')
     message['activity_id'] = args.get('activity_id')
-    if args.get('error_log') is not None: message['error_log'] = args.get('error_log')
+    if 'error' in args.get('args'): message['error_log'] = args.get('args').error
 
     data = json.dumps(message)
     data = data.encode('utf-8')
@@ -44,7 +44,7 @@ def main():
     parser_success.set_defaults(topic=config.configuration('PUBSUB_SUCCESSES_TOPIC'))
 
     args = parser.parse_args()
-    send_result(topic=args.topic, job_id=args.job_id, activity_id=args.activity_id, error_log=args.error)
+    send_result(topic=args.topic, job_id=args.job_id, activity_id=args.activity_id, args=args)
 
 
 if __name__ == '__main__':

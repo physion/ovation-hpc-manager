@@ -19,5 +19,5 @@ FIRST_JOB=$3
 
 echo "Running user container $2"
 
-export SINGULARITY_BINDPATH="/local/ovation/data/$USER_IMAGE/:/data"
+export SINGULARITY_BINDPATH="/local/ovation/data/$ACTIVITY_UUID/:/data"
 /cm/shared/sing-images/ovation/$FIRST_JOB/$USER_IMAGE
