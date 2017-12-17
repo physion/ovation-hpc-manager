@@ -2,10 +2,11 @@ import logging
 import sys
 import os
 import falcon
-import hpc_manager.settings as settings
+import hpc_manager.constants as constants
 import hpc_manager.helper as helper
-import hpc_manager.controller as controller
+import hpc_manager.tasks as tasks
 import hpc_manager.middleware as middleware
+import hpc_manager.system as system
 
 
 class HpcHandler(object):
@@ -15,25 +16,17 @@ class HpcHandler(object):
         body = helper.req_json(req)
         logging.debug("Body:{}".format(body))
 
-        helper.require_body_parameter(body, settings.ACTIVITY_ID)
-        helper.require_body_parameter(body, settings.USER_IMAGE)
-        helper.require_body_parameter(body, settings.ORGANIZATION)
+        helper.require_body_parameter(body, constants.ACTIVITY_ID)
+        helper.require_body_parameter(body, constants.USER_IMAGE)
+        helper.require_body_parameter(body, constants.ORGANIZATION)
 
         token = middleware.get_token(req)
-        body[settings.TOKEN] = token
+        body[constants.TOKEN] = token
 
-        controller.send_message(body)
+        tasks.send_message(body)
 
         resp.status = falcon.HTTP_201
 
 
-application = falcon.API()
-application.add_route('/hpc_run', HpcHandler())
+application = system.make_system()
 
-
-if __name__ == '__main__':
-    level = logging.DEBUG if 'DEBUG_LOG' in os.environ else logging.INFO
-    logging.basicConfig(stream=sys.stdout, level=level)
-
-    httpd = falcon.simple_server.make_server('127.0.0.1', 8000, application)
-    httpd.serve_forever()

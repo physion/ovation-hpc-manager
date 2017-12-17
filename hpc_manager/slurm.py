@@ -1,7 +1,7 @@
 import logging
 import paramiko
 import hpc_manager
-import hpc_manager.settings as settings
+import hpc_manager.constants as constants
 
 
 class SlurmException(Exception):
@@ -30,15 +30,15 @@ def submit_research_job(msg,
 
     logging.info("Received message: {}".format(msg))
 
-    if ((not settings.ACTIVITY_ID in msg) or
-            (not settings.ORGANIZATION in msg) or
-            (not settings.USER_IMAGE in msg)): #or (not 'token' in msg)
+    if ((not constants.ACTIVITY_ID in msg) or
+            (not constants.ORGANIZATION in msg) or
+            (not constants.USER_IMAGE in msg)): #or (not 'token' in msg)
         raise MessageException("Missing required message attributes")
 
-    activity_id = msg[settings.ACTIVITY_ID]
-    image_name = msg[settings.USER_IMAGE]
-    org = msg[settings.ORGANIZATION]
-    token = msg[settings.TOKEN]
+    activity_id = msg[constants.ACTIVITY_ID]
+    image_name = msg[constants.USER_IMAGE]
+    org = msg[constants.ORGANIZATION]
+    token = msg[constants.TOKEN]
 
     # (updated_token_info, session) = service.make_session(token_info,
     #                                                      organization=org,
