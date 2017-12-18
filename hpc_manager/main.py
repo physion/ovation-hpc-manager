@@ -7,7 +7,6 @@ import falcon
 
 
 application = system.make_system()
-application.add_route('/hpc_run', app.HpcHandler())
 
 
 if __name__ == '__main__':
