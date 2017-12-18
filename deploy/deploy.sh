@@ -4,7 +4,7 @@ NAMESPACE=$1
 
 set -e
 
-RELEASE_NAME=indexer-$NAMESPACE
+RELEASE_NAME=hpc-manager-$NAMESPACE
 DEFAULT_ZONE=us-east1-b
 KUBERNETES_CLUSTER_NAME=ovation
 
@@ -30,7 +30,7 @@ helm init --upgrade
 echo "Installing helm-secrets"
 helm plugin install https://github.com/futuresimple/helm-secrets
 
-echo "Upgrading indexer release..."
+echo "Upgrading hpc-manager release..."
 
 echo "NAMESPACE = $NAMESPACE"
 echo "RELEASE_NAME = $RELEASE_NAME"

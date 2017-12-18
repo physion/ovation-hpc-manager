@@ -28,5 +28,4 @@ class HpcHandler(object):
         resp.status = falcon.HTTP_201
 
 
-application = system.make_system()
 

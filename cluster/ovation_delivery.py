@@ -11,22 +11,28 @@ logging.basicConfig(stream=sys.stdout, level=level)
 
 
 def send_result(**args):
-    message = {}
-    topic = args.get('topic')
+    try:
+        message = {}
+        topic = args.get('topic')
 
-    message['job_id'] = args.get('job_id')
-    message['activity_id'] = args.get('activity_id')
-    if 'error' in args.get('args'): message['error_log'] = args.get('args').error
+        message['job_id'] = args.get('job_id')
+        message['activity_id'] = args.get('activity_id')
+        if 'error' in args.get('args'): message['error_log'] = args.get('args').error
 
-    data = json.dumps(message)
-    data = data.encode('utf-8')
+        data = json.dumps(message)
+        data = data.encode('utf-8')
 
-    publisher = gc_pubsub.PublisherClient()
-    topic_path = publisher.topic_path(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
-                                      topic)
+        publisher = gc_pubsub.PublisherClient()
+        topic_path = publisher.topic_path(config.configuration('GOOGLE_CLOUD_PROJECT_ID'),
+                                          topic)
 
-    publisher.publish(topic_path, data=data)
-    logging.info("The message sent to the topic {} is: {}".format(topic, json.dumps(message)))
+        publisher.publish(topic_path, data=data)
+        logging.info("The message sent to the topic {} is: {}".format(topic, json.dumps(message)))
+        return 0
+    except Exception as ex:
+        logging.exception(str(ex), exc_info=True)
+        return 1
+
 
 
 def main():
