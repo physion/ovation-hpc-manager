@@ -12,6 +12,16 @@ module load shared
 module load slurm/17.02.2
 module load singularity/2.4
 
+API_TOKEN=$1
+ACTIVITY_UUID=$2
+USER_IMAGE=$3
+
 
 export SINGULARITY_BINDPATH="/local:/local"
-/cm/shared/sing-images/ovation_download_files.img "$1" "$2"
+/cm/shared/sing-images/ovation/ovation_download_files.img "$API_TOKEN" "$ACTIVITY_UUID"
+ls /local/ovation/data/$ACTIVITY_UUID/related/
+mkdir /cm/shared/sing-images/ovation/$SLURM_JOB_ID
+chmod 777 /cm/shared/sing-images/ovation/$SLURM_JOB_ID
+cp /local/ovation/data/$ACTIVITY_UUID/related/$USER_IMAGE /cm/shared/sing-images/ovation/$SLURM_JOB_ID/$USER_IMAGE
+chmod 777 /cm/shared/sing-images/ovation/$SLURM_JOB_ID/$USER_IMAGE
+rm -rf /local/ovation/data/$ACTIVITY_UUID/outputs/*

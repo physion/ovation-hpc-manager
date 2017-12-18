@@ -20,8 +20,15 @@ ingress:
     kubernetes.io/tls-acme: "true"
 config:
   GOOGLE_CLOUD_PROJECT_ID: project-id
+  CLUSTER_HEAD_NODE: cluster-head-node
+  SSH_KEY_FILE: /var/secrets/ssh/id_rsa
+  KNOWN_HOSTS_FILE: /var/secrets/ssh/known_hosts
+  SSH_USERNAME: username
 secret:
   GCP_SERVICE_KEY_JSON: json
+  SSH_ID_RSA: text
+  SSH_ID_RSA_PUB: text
+  SSH_KNOWN_HOSTS: text
 kube-lego:
   config:
     LEGO_EMAIL: registered-email

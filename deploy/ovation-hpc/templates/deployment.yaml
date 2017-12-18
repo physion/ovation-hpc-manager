@@ -24,28 +24,86 @@ spec:
         - name: google-cloud-key
           secret:
             secretName: {{ .Release.Name }}-service-key-secret
+        - name: ssh-key
+          secret:
+            secretName: {{ .Release.Name }}-ssh-key-secret
+        - name: vpn-settings
+          secret:
+            secretName: {{ .Release.Name }}-vpn-settings-secret
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["gunicorn"]
-          args: ["hpc.app:application"]
+          command: ["/app/bin/startup.sh"]
+          args: ["/var/secrets/vpn/ovation.ovpn"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
-#          livenessProbe:
-#            httpGet:
-#              path: /
-#              port: {{ .Values.service.internalPort }}
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 1
+            httpGet:
+              path: /status
+              port: {{ .Values.service.internalPort }}
           readinessProbe:
             httpGet:
-              path: /
+              path: /status
               port: {{ .Values.service.internalPort }}
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
+            - name: ssh-key
+              mountPath: /var/secrets/ssh
+            - name: vpn-settings
+              mountPath: /var/secrets/vpn
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
+            - name: PUBSUB_REQUESTS_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_REQUESTS_TOPIC
+            - name: PUBSUB_FAILURES_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_FAILURES_TOPIC
+            - name: PUBSUB_SUCCESSES_TOPIC
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_SUCCESSES_TOPIC
+            - name: PUBSUB_REQUEST_SUBSCRIPTION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: PUBSUB_REQUEST_SUBSCRIPTION_NAME
+            - name: OVATION_AUTH_DOMAIN
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: OVATION_AUTH_DOMAIN
+            - name: OVATION_AUDIENCE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: OVATION_AUDIENCE
+            - name: OVATION_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: OVATION_CLIENT_ID
+            - name: OVATION_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: OVATION_CLIENT_SECRET
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: JWT_SECRET
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}

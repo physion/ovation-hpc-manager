@@ -1,17 +1,12 @@
 version: '2'
 
 services:
-  library:
+  app:
     build:
       image: ovation-hpc-manager
       dockerfile: Dockerfile
     environment:
       - PYTHONPATH=/app
-
-  pypi:
-    build:
-      dockerfile: Dockerfile
-    encrypted_env_file: pypi.env.encrypted
 
   gcr-dockercfg:
     image: codeship/gcr-dockercfg-generator
