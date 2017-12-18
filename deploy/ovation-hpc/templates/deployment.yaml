@@ -39,12 +39,12 @@ spec:
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 1
             httpGet:
               path: /status
               port: {{ .Values.service.internalPort }}
-              initialDelaySeconds: 20
-              periodSeconds: 15
-              timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /status
