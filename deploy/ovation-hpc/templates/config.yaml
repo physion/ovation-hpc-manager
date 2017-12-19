@@ -4,11 +4,12 @@ metadata:
   name: {{ .Release.Name }}-config
   namespace: {{ .Release.Namespace }}
 data:
-  CLOUDANT_DB_URL: {{ .Values.config.CLOUDANT_DB_URL }}
-  OVATION_IO_HOST_URI: {{ .Values.config.OVATION_IO_HOST_URI }}
   GOOGLE_CLOUD_PROJECT_ID: {{ .Values.config.GOOGLE_CLOUD_PROJECT_ID }}
-  DB_UPDATES_TOPIC: updates-{{ .Release.Namespace }}
+  CLUSTER_HEAD_NODE: {{ .Values.config.CLUSTER_HEAD_NODE }}
+  SSH_USERNAME: {{ .Values.config.SSH_USERNAME }}
   PUBSUB_REQUESTS_TOPIC: {{ .Values.config.PUBSUB_REQUESTS_TOPIC }}
   PUBSUB_FAILURES_TOPIC: {{ .Values.config.PUBSUB_FAILURES_TOPIC }}
   PUBSUB_SUCCESSES_TOPIC: {{ .Values.config.PUBSUB_SUCCESSES_TOPIC }}
   PUBSUB_REQUEST_SUBSCRIPTION_NAME: {{ .Values.config.PUBSUB_REQUEST_SUBSCRIPTION_NAME }}
+  OVATION_AUTH_DOMAIN: {{ .Values.config.OVATION_AUTH_DOMAIN }}
+  OVATION_AUDIENCE: {{ .Values.config.OVATION_AUDIENCE }}
