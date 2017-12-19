@@ -3,14 +3,14 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: nginx
+  repository: gcr.io/ovation-io/hpc-manager
   tag: stable
   pullPolicy: IfNotPresent
 service:
-  name: nginx
-  type: NodePort
+  name: app
+  type: ClusterIP
   externalPort: 80
-  internalPort: 80
+  internalPort: 8000
 ingress:
   enabled: false
   # Used to create an Ingress record.

@@ -29,7 +29,8 @@ spec:
   tls:
     - secretName: {{ .Release.Name }}-tls
       hosts:
-        {{ .Release.Name }}.ovation.io
-
+      {{- range $host := .Values.ingress hosts }}
+        - {{ $host }}
+      {{- end -}}
   {{- end -}}
 {{- end -}}
