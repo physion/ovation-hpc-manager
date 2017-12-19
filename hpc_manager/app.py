@@ -1,12 +1,9 @@
 import logging
-import sys
-import os
 import falcon
 import hpc_manager.constants as constants
 import hpc_manager.helper as helper
 import hpc_manager.tasks as tasks
 import hpc_manager.middleware as middleware
-import hpc_manager.system as system
 
 
 class HpcRunResource(object):
