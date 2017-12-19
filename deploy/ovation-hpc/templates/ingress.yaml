@@ -29,7 +29,7 @@ spec:
   tls:
     - secretName: {{ .Release.Name }}-tls
       hosts:
-      {{- range $host := .Values.ingress hosts }}
+      {{- range $host := .Values.ingress.hosts }}
         - {{ $host }}
       {{- end -}}
   {{- end -}}
