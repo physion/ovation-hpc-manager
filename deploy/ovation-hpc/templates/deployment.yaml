@@ -46,6 +46,7 @@ spec:
               path: /status
               port: {{ .Values.service.internalPort }}
           readinessProbe:
+            initialDelaySeconds: 20
             httpGet:
               path: /status
               port: {{ .Values.service.internalPort }}

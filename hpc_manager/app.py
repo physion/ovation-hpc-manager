@@ -9,7 +9,7 @@ import hpc_manager.middleware as middleware
 import hpc_manager.system as system
 
 
-class HpcHandler(object):
+class HpcRunResource(object):
     @falcon.before(middleware.require_auth)
     @falcon.before(middleware.max_body(64 * 1024))
     def on_post(self, req, resp):
@@ -25,7 +25,18 @@ class HpcHandler(object):
 
         tasks.send_message(body)
 
-        resp.status = falcon.HTTP_201
+        resp.status = falcon.HTTP_CREATED
 
+
+
+class StatusResource:
+    def on_get(self, req, resp):
+        """Handles GET requests"""
+        quote = {
+            'status': 'alive'
+        }
+
+        resp.media = quote
+        resp.status = falcon.HTTP_OK
 
 
