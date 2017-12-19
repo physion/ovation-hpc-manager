@@ -12,12 +12,10 @@ service:
   externalPort: 80
   internalPort: 80
 ingress:
-  enabled: true
+  enabled: false
   # Used to create an Ingress record.
   hosts:
     - hpc.local
-  annotations:
-    kubernetes.io/tls-acme: "true"
 config:
   GOOGLE_CLOUD_PROJECT_ID: project-id
   CLUSTER_HEAD_NODE: cluster-head-node
