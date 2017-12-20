@@ -25,7 +25,6 @@ class HpcRunResource(object):
         resp.status = falcon.HTTP_CREATED
 
 
-
 class StatusResource:
     def on_get(self, req, resp):
         """Handles GET requests"""
