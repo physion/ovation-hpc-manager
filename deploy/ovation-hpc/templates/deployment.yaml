@@ -38,13 +38,13 @@ spec:
           args: ["/var/secrets/vpn/ovation.ovpn"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
-          #livenessProbe:
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: {{ .Values.service.internalPort }}
           #  initialDelaySeconds: 20
           #  periodSeconds: 15
           #  timeoutSeconds: 1
-          #  httpGet:
-          #    path: /status
-          #    port: {{ .Values.service.internalPort }}
           #readinessProbe:
           #  initialDelaySeconds: 20
           #  httpGet:
