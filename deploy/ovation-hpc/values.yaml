@@ -9,7 +9,7 @@ image:
 service:
   name: app
   type: NodePort
-  externalPort: 80
+  externalPort: 8000
   internalPort: 8000
 ingress:
   enabled: false
