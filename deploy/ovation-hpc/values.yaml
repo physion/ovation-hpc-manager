@@ -7,9 +7,9 @@ image:
   tag: stable
   pullPolicy: IfNotPresent
 service:
-  name: app
-  type: NodePort
-  externalPort: 8000
+  name: http
+  type: ClusterIP
+  externalPort: 80
   internalPort: 8000
 ingress:
   enabled: true
