@@ -9,10 +9,10 @@ image:
 service:
   name: app
   type: NodePort
-  externalPort: 8000
-  internalPort: 8000
+  externalPort: 80
+  internalPort: 8080
 ingress:
-  enabled: false
+  enabled: true
   # Used to create an Ingress record.
   hosts:
     - hpc.local
@@ -27,10 +27,10 @@ secret:
   SSH_ID_RSA: text
   SSH_ID_RSA_PUB: text
   SSH_KNOWN_HOSTS: text
-kube-lego:
-  config:
-    LEGO_EMAIL: registered-email
-    LEGO_URL: https://acme-staging.api.letsencrypt.org/directory
+#kube-lego:
+#  config:
+#    LEGO_EMAIL: registered-email
+#    LEGO_URL: https://acme-staging.api.letsencrypt.org/directory
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
