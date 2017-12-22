@@ -27,6 +27,7 @@ class HpcRunResource(object):
 
 class StatusResource:
     def on_get(self, req, resp):
+        logging.info("Status alive")
         """Handles GET requests"""
         quote = {
             'status': 'alive'
