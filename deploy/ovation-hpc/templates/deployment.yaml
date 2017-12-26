@@ -24,12 +24,12 @@ spec:
         - name: google-cloud-key
           secret:
             secretName: {{ .Release.Name }}-service-key-secret
-        - name: ssh-key
-          secret:
-            secretName: {{ .Release.Name }}-ssh-key-secret
-        - name: vpn-settings
-          secret:
-            secretName: {{ .Release.Name }}-vpn-settings-secret
+#        - name: ssh-key
+#          secret:
+#            secretName: {{ .Release.Name }}-ssh-key-secret
+#        - name: vpn-settings
+#          secret:
+#            secretName: {{ .Release.Name }}-vpn-settings-secret
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -45,18 +45,18 @@ spec:
 #            initialDelaySeconds: 20
 #            periodSeconds: 15
 #            timeoutSeconds: 1
-#          readinessProbe:
-#            httpGet:
-#              path: /
-#              port: {{ .Values.service.internalPort }}
-#            initialDelaySeconds: 20
+          readinessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: 20
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
-            - name: ssh-key
-              mountPath: /var/secrets/ssh
-            - name: vpn-settings
-              mountPath: /var/secrets/vpn
+#            - name: ssh-key
+#              mountPath: /var/secrets/ssh
+#            - name: vpn-settings
+#              mountPath: /var/secrets/vpn
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
