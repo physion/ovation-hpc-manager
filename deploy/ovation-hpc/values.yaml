@@ -10,7 +10,7 @@ service:
   name: app
   type: NodePort
   externalPort: 80
-  internalPort: 8080
+  internalPort: 8000
 ingress:
   enabled: false
   # Used to create an Ingress record.
