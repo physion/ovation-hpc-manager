@@ -36,12 +36,6 @@ spec:
           args: ["hpc_manager.main:application"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
-          readinessProbe:
-            httpGet:
-              path: /status
-              port: {{ .Values.service.internalPort }}
-            initialDelaySeconds: 20
-            timeoutSeconds: 25
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
