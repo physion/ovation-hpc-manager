@@ -8,7 +8,7 @@ image:
   pullPolicy: IfNotPresent
 service:
   name: hpc-manager
-  type: ClusterIP
+  type: NodePort
   externalPort: 80
   internalPort: 8000
 ingress:
