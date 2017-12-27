@@ -14,7 +14,6 @@ spec:
       labels:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
-        env: {{ .Release.Namespace }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/pre-install-secret.yaml") . | sha256sum }}
         checksum/service: {{ include (print $.Template.BasePath "/pre-install-service-key-secret.yaml") . | sha256sum }}
@@ -37,16 +36,15 @@ spec:
           args: ["hpc_manager.main:application"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
-#          livenessProbe:
-#            httpGet:
-#              path: /status
-#              port: {{ .Values.service.internalPort }}
-#            initialDelaySeconds: 20
-#            periodSeconds: 15
-#            timeoutSeconds: 1
+          livenessProbe:
+            httpGet:
+              path: /status
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: 20
+            timeoutSeconds: 25
           readinessProbe:
             httpGet:
-              path: /
+              path: /status
               port: {{ .Values.service.internalPort }}
             initialDelaySeconds: 20
             timeoutSeconds: 25

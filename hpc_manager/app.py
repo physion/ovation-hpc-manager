@@ -10,8 +10,9 @@ class HpcRunResource(object):
     @falcon.before(middleware.require_auth)
     @falcon.before(middleware.max_body(64 * 1024))
     def on_post(self, req, resp):
-        body = helper.req_json(req)
-        logging.debug("Body:{}".format(body))
+        body = req.media
+
+        logging.info("HPC Run request: {}".format(body))
 
         helper.require_body_parameter(body, constants.ACTIVITY_ID)
         helper.require_body_parameter(body, constants.USER_IMAGE)
@@ -23,17 +24,20 @@ class HpcRunResource(object):
         tasks.send_message(body)
 
         resp.status = falcon.HTTP_CREATED
+        resp.content_type = falcon.MEDIA_JSON
 
 
 class StatusResource:
     def on_get(self, req, resp):
-        logging.info("Status alive")
         """Handles GET requests"""
-        quote = {
+
+        logging.info("StatusResource: alive")
+        response_body = {
             'status': 'alive'
         }
 
-        resp.media = quote
+        resp.media = response_body
+        resp.content_type = falcon.MEDIA_JSON
         resp.status = falcon.HTTP_OK
 
 

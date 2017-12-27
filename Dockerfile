@@ -4,6 +4,8 @@ RUN apt-get update -y &&  apt-get install -y openvpn
 
 RUN touch /etc/openvpn/credentials
 
+RUN mkdir -p /var/secrets
+
 # Set the WORKDIR to /app so all following commands run in /app
 WORKDIR /app
 

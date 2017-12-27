@@ -21,7 +21,7 @@ echo "NAMESPACE = $NAMESPACE"
 echo "RELEASE_NAME = $RELEASE_NAME"
 echo "CI_TIMESTAMP = $CI_TIMESTAMP"
 
-helm-wrapper upgrade --install  --namespace=${NAMESPACE} --timeout 600 --wait \
+helm-wrapper upgrade --install --namespace=${NAMESPACE} --timeout 600 --wait \
     --set image.tag=${NAMESPACE}-${CI_TIMESTAMP} \
     -f ./deploy/values/${NAMESPACE}/secrets.yaml \
     ${RELEASE_NAME} \

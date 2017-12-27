@@ -4,8 +4,22 @@ import jwt
 import re
 import os
 
-logger = logging.getLogger('app.middleware')
+logger = logging.getLogger('middleware')
 
+
+class RequestLoggerMiddleware(object):
+    def process_resource(self, req, resp, resource, params):
+        logger.info('{} {} {} {}'.format(req.forwarded_scheme,
+                                         req.forwarded_host,
+                                         req.method,
+                                         req.relative_uri))
+
+    def process_response(self, req, resp, resource, req_succeeded):
+        logger.info('{} {} {} {} {}'.format(req.forwarded_scheme,
+                                            req.forwarded_host,
+                                            req.method,
+                                            req.relative_uri,
+                                            resp.status))
 
 def get_token(req):
     if req.auth is None:
