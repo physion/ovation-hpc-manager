@@ -36,12 +36,6 @@ spec:
           args: ["hpc_manager.main:application"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
-          livenessProbe:
-            httpGet:
-              path: /status
-              port: {{ .Values.service.internalPort }}
-            initialDelaySeconds: 20
-            timeoutSeconds: 25
           readinessProbe:
             httpGet:
               path: /status
