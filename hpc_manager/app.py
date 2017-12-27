@@ -7,8 +7,8 @@ import hpc_manager.middleware as middleware
 
 
 class HpcRunResource(object):
-    @falcon.before(middleware.require_auth)
-    @falcon.before(middleware.max_body(64 * 1024))
+    #@falcon.before(middleware.require_auth)
+    #@falcon.before(middleware.max_body(64 * 1024))
     def on_post(self, req, resp):
         body = req.media
 
