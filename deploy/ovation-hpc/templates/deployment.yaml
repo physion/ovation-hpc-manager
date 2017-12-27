@@ -46,6 +46,8 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
+            - name: KNOWN_HOSTS_FILE
+              value: /var/secrets/ssh/known_hosts
             - name: PUBSUB_REQUESTS_TOPIC
               valueFrom:
                 configMapKeyRef:
