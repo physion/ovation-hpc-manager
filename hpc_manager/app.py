@@ -31,7 +31,6 @@ class StatusResource:
     def on_get(self, req, resp):
         """Handles GET requests"""
 
-        logging.info("StatusResource: alive")
         response_body = {
             'status': 'alive'
         }

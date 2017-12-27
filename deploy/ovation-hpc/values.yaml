@@ -7,8 +7,8 @@ image:
   tag: stable
   pullPolicy: IfNotPresent
 service:
-  name: app
-  type: NodePort
+  name: hpc-manager
+  type: ClusterIP
   externalPort: 80
   internalPort: 8000
 ingress:
