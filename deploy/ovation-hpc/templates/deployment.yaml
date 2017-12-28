@@ -32,10 +32,14 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["gunicorn"]
-          args: ["hpc_manager.main:application"]
+          command: ["/app/bin/startup.sh"]
+          args: ["/var/secrets/vpn/ovation.ovpn"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
