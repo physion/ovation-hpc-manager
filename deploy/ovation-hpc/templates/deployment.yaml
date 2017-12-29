@@ -53,9 +53,12 @@ spec:
             - name: KNOWN_HOSTS_FILE
               value: /var/secrets/ssh/known_hosts
             - name: SSH_KEY_FILE
-              value: /app/id_rsa
+              value: /var/secrets/ssh/id_rsa
             - name: SSH_USERNAME
-              value: ortizt
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: SSH_USERNAME
             - name: CLUSTER_HEAD_NODE
               valueFrom:
                 configMapKeyRef:
