@@ -52,6 +52,15 @@ spec:
               value: /var/secrets/google/key.json
             - name: KNOWN_HOSTS_FILE
               value: /var/secrets/ssh/known_hosts
+            - name: SSH_KEY_FILE
+              value: /app/id_rsa
+            - name: SSH_USERNAME
+              value: ortizt
+            - name: CLUSTER_HEAD_NODE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: CLUSTER_HEAD_NODE
             - name: PUBSUB_REQUESTS_TOPIC
               valueFrom:
                 configMapKeyRef:

@@ -10,7 +10,7 @@ chmod 600 /dev/net/tun
 
 #printf '%s\n' $VPN_USERNAME $VPN_PASSWORD > /etc/openvpn/credentials
 #sed -i 's/auth-user-pass/auth-user-pass \/etc\/openvpn\/credentials/g' $OVPN_PATH
-openvpn --config $OVPN_PATH --daemon .
+openvpn --config $OVPN_PATH --daemon
 
 
 # Start HPC manager

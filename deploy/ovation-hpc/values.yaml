@@ -18,7 +18,7 @@ ingress:
     - hpc.local
 config:
   GOOGLE_CLOUD_PROJECT_ID: project-id
-  CLUSTER_HEAD_NODE: cluster-head-node
+  CLUSTER_HEAD_NODE: 10.20.30.98
   SSH_KEY_FILE: /var/secrets/ssh/id_rsa
   KNOWN_HOSTS_FILE: /var/secrets/ssh/known_hosts
   SSH_USERNAME: username
