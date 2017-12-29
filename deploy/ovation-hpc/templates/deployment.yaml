@@ -54,11 +54,6 @@ spec:
               value: /var/secrets/ssh/known_hosts
             - name: SSH_KEY_FILE
               value: /var/secrets/ssh/id_rsa
-            - name: SSH_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ .Release.Name }}-config
-                  key: SSH_USERNAME
             - name: CLUSTER_HEAD_NODE
               valueFrom:
                 configMapKeyRef:
@@ -109,6 +104,11 @@ spec:
                 secretKeyRef:
                   name: {{ .Release.Name }}-secret
                   key: JWT_SECRET
+            - name: SSH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-secret
+                  key: SSH_USERNAME
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
