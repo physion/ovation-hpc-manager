@@ -16,7 +16,6 @@ spec:
         release: {{ .Release.Name }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
-        checksum/service: {{ include (print $.Template.BasePath "/pre-install-service-key-secret.yaml") . | sha256sum }}
     spec:
       volumes:
         - name: google-cloud-key
