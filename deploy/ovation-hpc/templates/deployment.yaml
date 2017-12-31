@@ -28,6 +28,9 @@ spec:
         - name: vpn-settings
           secret:
             secretName: {{ .Release.Name }}-vpn-settings-secret
+        - name: env-secrets
+          secret:
+            secretName: {{ .Release.Name }}-secret
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -47,6 +50,8 @@ spec:
               mountPath: /var/secrets/ssh
             - name: vpn-settings
               mountPath: /var/secrets/vpn
+            - name: env-secrets
+              mountPath: /var/secrents/env
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
