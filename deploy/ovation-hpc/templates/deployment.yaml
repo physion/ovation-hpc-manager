@@ -15,7 +15,7 @@ spec:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
       annotations:
-        checksum/secret: {{ include (print $.Template.BasePath "/pre-install-secret.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
         checksum/service: {{ include (print $.Template.BasePath "/pre-install-service-key-secret.yaml") . | sha256sum }}
     spec:
       volumes:
