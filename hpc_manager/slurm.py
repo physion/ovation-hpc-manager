@@ -61,8 +61,8 @@ def submit_research_job(msg,
     try:
         cmd = '~/bin/{ver}/ovation_helper.sh'
         stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__))
-        if stdout.channel.recv_exit_status() != 0:
-            raise SlurmException(stderr.read())
+        #if stdout.channel.recv_exit_status() != 0:
+        #    raise SlurmException(stderr.read())
 
         cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image}'
         stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
