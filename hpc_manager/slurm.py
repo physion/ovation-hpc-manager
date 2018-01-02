@@ -57,6 +57,7 @@ def submit_research_job(msg,
                    allow_agent=False,
                    look_for_keys=False,
                    username=ssh_username)
+    logging.info("Successful connection")
 
     try:
         cmd = '~/bin/{ver}/ovation_helper.sh'
