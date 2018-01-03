@@ -13,7 +13,7 @@ From: ubuntu:16.04
 
     if [ -s /local/s_aws_err_"$3".out ]
     then
-        python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py error -j "$3" -a "$2" -e "$(< /local/s_aws_err_"$3".out)" || echo "Error to send the message to $PUBSUB_FAILURES_TOPIC"
+        python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py error -j "$3" -a "$2" -e "$(cat /local/s_aws_err_"$3".out)" || echo "Error to send the message to $PUBSUB_FAILURES_TOPIC"
     else
         python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py success -j "$3" -a "$2" || echo "Error to send the message to $PUBSUB_SUCCESSES_TOPIC"
     fi
