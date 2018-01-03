@@ -42,12 +42,12 @@ spec:
             capabilities:
               add:
                 - NET_ADMIN
-          readinessProbe:
-            httpGet:
-              path: /status
-              port: {{ .Values.service.internalPort }}
-            initialDelaySeconds: 20
-            timeoutSeconds: 25
+#          readinessProbe:
+#            httpGet:
+#              path: /status
+#              port: {{ .Values.service.internalPort }}
+#            initialDelaySeconds: 20
+#            timeoutSeconds: 25
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google

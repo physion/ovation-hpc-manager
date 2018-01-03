@@ -4,8 +4,8 @@ import hpc_manager.middleware as middleware
 
 
 def make_system():
-    #application = falcon.API(middleware=[middleware.RequestLoggerMiddleware()])
-    application = falcon.API()
+    application = falcon.API(middleware=[middleware.RequestLoggerMiddleware()])
+    #application = falcon.API()
     application.add_route('/hpc_run', app.HpcRunResource())
     application.add_route('/', app.StatusResource())
     application.add_route('/status', app.StatusResource())
