@@ -46,7 +46,6 @@ spec:
           readinessProbe:
             httpGet:
               path: /healthz
-              host: 127.0.0.1
               port: {{ .Values.service.internalPort }}
             initialDelaySeconds: 20
             timeoutSeconds: 15
