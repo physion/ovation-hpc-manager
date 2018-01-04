@@ -14,6 +14,7 @@ spec:
       labels:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
+        env: {{ .Release.Namespace }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
     spec:
@@ -44,10 +45,10 @@ spec:
                 - NET_ADMIN
           readinessProbe:
             httpGet:
-              path: /status
+              path: /
               port: {{ .Values.service.internalPort }}
             initialDelaySeconds: 20
-            timeoutSeconds: 25
+            timeoutSeconds: 15
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
