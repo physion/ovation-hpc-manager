@@ -8,7 +8,7 @@ def make_system():
     application = falcon.API()
     application.add_route('/hpc_run', app.HpcRunResource())
     application.add_route('/', app.StatusResource())
-    application.add_route('/status', app.StatusResource())
+    application.add_route('/healthz', app.StatusResource())
 
     # cb = pubsub.make_research_callback(submit_research_job,
     #                                    client_id=config.secret('OVATION_CLIENT_ID'),
