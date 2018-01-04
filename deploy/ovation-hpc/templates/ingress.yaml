@@ -5,25 +5,25 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ template "fullname" . }}
-  labels:
-    app: {{ template "name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-  annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-      {{ $key }}: {{ $value | quote }}
-    {{- end }}
+#  labels:
+#    app: {{ template "name" . }}
+#    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+#    release: {{ .Release.Name }}
+#    heritage: {{ .Release.Service }}
+#  annotations:
+#    {{- range $key, $value := .Values.ingress.annotations }}
+#      {{ $key }}: {{ $value | quote }}
+#    {{- end }}
 spec:
   backend:
     serviceName: {{ $serviceName }}
     servicePort: {{ $servicePort }}
-  {{- if .Values.ingress.tls }}
-  tls:
-    - secretName: {{ .Release.Name }}-tls
-      hosts:
-      {{- range $host := .Values.ingress.hosts }}
-        - {{ $host }}
-      {{- end -}}
-  {{- end -}}
-{{- end -}}
+#  {{- if .Values.ingress.tls }}
+#  tls:
+#    - secretName: {{ .Release.Name }}-tls
+#      hosts:
+#      {{- range $host := .Values.ingress.hosts }}
+#        - {{ $host }}
+#      {{- end -}}
+#  {{- end -}}
+#{{- end -}}
