@@ -12,7 +12,7 @@ ENV PATH=$PATH:$HOME/go/bin
 
 RUN go get -u go.mozilla.org/sops/cmd/sops
 
-EXPOSE 8000
+EXPOSE 80
 
 ADD . /app
 WORKDIR /app
