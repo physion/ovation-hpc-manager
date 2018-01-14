@@ -45,7 +45,7 @@ spec:
                 - NET_ADMIN
           readinessProbe:
             httpGet:
-              path: /healthz
+              path: /
               port: 80
             initialDelaySeconds: 20
             timeoutSeconds: 15
