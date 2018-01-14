@@ -16,13 +16,15 @@ metadata:
     {{- end }}
 spec:
   rules:
-    - host: hpc-development.ovation.io
+    {{- range $host := .Values.ingress.hosts }}
+    - host: {{ $host }}
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ $serviceName }}
               servicePort: {{ $servicePort }}
+    {{- end -}}
   {{- if .Values.ingress.tls }}
   tls:
     - secretName: {{ .Release.Name }}-tls
