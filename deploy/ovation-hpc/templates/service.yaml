@@ -8,12 +8,11 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  type: {{ .Values.service.type }}
+  type: NodePort
   ports:
-    - port: {{ .Values.service.externalPort }}
-      targetPort: {{ .Values.service.internalPort }}
-      protocol: TCP
-      name: {{ .Values.service.name }}
+  - port: 80
+    protocol: TCP
+    targetPort: 8000
   selector:
     app: {{ template "name" . }}
     release: {{ .Release.Name }}
