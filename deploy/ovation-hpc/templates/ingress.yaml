@@ -16,7 +16,8 @@ metadata:
     {{- end }}
 spec:
   rules:
-    - http:
+    - host: hpc-development.ovation.io
+      http:
         paths:
           - path: /
             backend:
