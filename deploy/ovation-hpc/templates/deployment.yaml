@@ -36,7 +36,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/app/bin/startup.sh"]
-          args: ["/var/secrets/vpn/ovation.ovpn", {{ .Values.service.internalPort }}]
+          args: ["/var/secrets/vpn/ovation.ovpn", "{{ .Values.service.internalPort }}"]
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           securityContext:
