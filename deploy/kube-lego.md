@@ -3,7 +3,6 @@
 The _hpc-manager_ requires `kube-lego` running on the cluster.
 
 To install:
-(**FIXME: jetstack isn't a helm chart**)
 ```bash
 helm install --name kube-lego-development stable/kube-lego\
     --namespace development \
