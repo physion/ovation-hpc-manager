@@ -2,6 +2,8 @@
 
 OVPN_PATH=$1
 
+INTERNAL_PORT=$2
+
 # Start VPN. /var/secrets/vpn/credentials should be username\npassword\n
 
 mkdir -p /dev/net
@@ -16,4 +18,4 @@ openvpn --config $OVPN_PATH --daemon
 # Start HPC manager
 # python -m hpc_manager.main
 
-gunicorn -b 0.0.0.0:80 hpc_manager.main:application
+gunicorn -b 0.0.0.0:$INTERNAL_PORT hpc_manager.main:application
