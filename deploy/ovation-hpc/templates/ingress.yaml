@@ -15,8 +15,7 @@ metadata:
       {{ $key }}: {{ $value | quote }}
     {{- end }}
 spec:
-  rules:
-    backend:
+  backend:
       serviceName: {{ $serviceName }}
       servicePort: {{ $servicePort }}
   {{- if .Values.ingress.tls }}
