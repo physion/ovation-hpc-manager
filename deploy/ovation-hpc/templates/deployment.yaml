@@ -49,6 +49,12 @@ spec:
               port: {{ .Values.service.internalPort }}
             initialDelaySeconds: 20
             timeoutSeconds: 15
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.internalPort }}
+            initialDelaySeconds: 30
+            timeoutSeconds: 15
           volumeMounts:
             - name: google-cloud-key
               mountPath: /var/secrets/google
