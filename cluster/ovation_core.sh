@@ -15,6 +15,6 @@ jid1=$(sbatch ~/bin/$VERSION/ovation_download_files.job $API_TOKEN $ACTIVITY_UUI
 jid2=$(sbatch --dependency=afterany:$jid1 ~/bin/$VERSION/ovation_user.job $ACTIVITY_UUID $USER_IMAGE $jid1 | cut -f4 -d' ')
 
 
-jid3=$(sbatch --dependency=afterany:$jid2 ~/bin/$VERSION/ovation_upload_result.job $API_TOKEN $ACTIVITY_UUID $jid2 $USER_IMAGE $jid1 $OVATION_CLI_ARGS | cut -f4 -d' ')
+sbatch --dependency=afterany:$jid2 ~/bin/$VERSION/ovation_upload_result.job $API_TOKEN $ACTIVITY_UUID $jid2 $USER_IMAGE $jid1 $OVATION_CLI_ARGS
 
 squeue
