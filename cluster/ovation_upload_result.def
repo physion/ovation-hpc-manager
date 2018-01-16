@@ -21,4 +21,4 @@ From: ubuntu:16.04
         python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py success -j "$SECOND_JOB" -a "$ACTIVITY_UUID" || echo "Error to send the message to $PUBSUB_SUCCESSES_TOPIC"
     fi
 
-    python3 -m ovation.cli -t "$API_TOKEN" add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/* $OVATION_CLI_ARGS
+    python3 -m ovation.cli -t "$API_TOKEN" $OVATION_CLI_ARGS add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/*

@@ -13,5 +13,5 @@ From: ubuntu:16.04
     ACTIVITY_UUID=$2
     OVATION_CLI_ARGS=$3
 	mkdir -p /local/ovation/data/$ACTIVITY_UUID/
-	python3 -m ovation.cli -t "$API_TOKEN" download "$ACTIVITY_UUID" --output /local/ovation/data/$ACTIVITY_UUID/ $OVATION_CLI_ARGS
+	python3 -m ovation.cli -t "$API_TOKEN" $OVATION_CLI_ARGS download "$ACTIVITY_UUID" --output /local/ovation/data/$ACTIVITY_UUID/
 
