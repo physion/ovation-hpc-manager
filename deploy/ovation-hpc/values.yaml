@@ -25,6 +25,7 @@ config:
   SSH_KEY_FILE: /var/secrets/ssh/id_rsa
   KNOWN_HOSTS_FILE: /var/secrets/ssh/known_hosts
   SSH_USERNAME: ortizt
+  OVATION_CLI_ARGS: ""
 secret:
   GCP_SERVICE_KEY_JSON: json
   SSH_ID_RSA: text
