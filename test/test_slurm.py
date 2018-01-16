@@ -78,7 +78,7 @@ def test_submit_research_job_should_submit_job(make_session, ssh_client):
 
     # Assert
     client.exec_command.assert_called_with(
-        '~/bin/{ver}/ovation_core.sh {token} {activity} {image}'.format(ver=hpc_manager.__version__,
+        '~/bin/{ver}/ovation_core.sh {token} {activity} {image} {ovation_cli_args}'.format(ver=hpc_manager.__version__,
                                                                 token=sentinel.token,
                                                                 activity=sentinel.activity_id,
                                                                 image=sentinel.image_name,
