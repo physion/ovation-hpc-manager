@@ -15,6 +15,5 @@ def send_message(message):
                                                   key_filename=config.configuration('SSH_KEY_FILE'),
                                                   host_key_file=config.configuration('KNOWN_HOSTS_FILE'),
                                                   ssh_username=config.configuration('SSH_USERNAME'),
-                                                  ovation_cli_args=config.configuration('OVATION_CLI_ARGS')
-                                                  )
+                                                  ovation_cli_args=config.configuration('OVATION_CLI_ARGS'))
 
