@@ -46,8 +46,7 @@ def test_submit_research_job_should_connect_to_head_node(make_session, ssh_clien
                                       key_filename=sentinel.key_filename,
                                       allow_agent=False,
                                       look_for_keys=False,
-                                      username=sentinel.username,
-                                      ovation_cli_args=sentinel.ovation_cli_args)
+                                      username=sentinel.username)
 
 
 @patch('paramiko.SSHClient')
@@ -72,7 +71,8 @@ def test_submit_research_job_should_submit_job(make_session, ssh_client):
 
     result = slurm.submit_research_job(msg,
                                        head_node=sentinel.head_node,
-                                       key_filename=sentinel.key_filename)
+                                       key_filename=sentinel.key_filename,
+                                       ovation_cli_args=sentinel.ovation_cli_args)
 
     assert result == (sentinel.job_output, {})
 
