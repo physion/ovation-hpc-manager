@@ -17,6 +17,7 @@ ACTIVITY_UUID=$2
 SECOND_JOB=$3
 USER_IMAGE=$4
 FIRST_JOB=$5
+OVATION_CLI_ARGS=$4
 
 echo "test upload result"
 chmod 777 /local/s_aws_out_"$SECOND_JOB".out
@@ -31,7 +32,7 @@ cp /local/s_aws_out_"$SECOND_JOB".out /local/ovation/data/"$ACTIVITY_UUID"/outpu
 
 export SINGULARITY_BINDPATH="/local/:/local"
 echo "run container"
-/cm/shared/sing-images/ovation/ovation_upload_result.img "$API_TOKEN" "$ACTIVITY_UUID" "$SECOND_JOB"
+/cm/shared/sing-images/ovation/ovation_upload_result.img "$API_TOKEN" "$ACTIVITY_UUID" "$SECOND_JOB" "$OVATION_CLI_ARGS"
 echo "exit container"
 
 rm -rf /local/ovation/data/$ACTIVITY_UUID/

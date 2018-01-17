@@ -34,4 +34,3 @@ def receive_messages(project, topic_path, subscription_name):
     print('Listening for messages on {}'.format(subscription_path))
     while True:
         time.sleep(60)
-

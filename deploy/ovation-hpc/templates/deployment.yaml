@@ -76,6 +76,11 @@ spec:
                 configMapKeyRef:
                   name: {{ .Release.Name }}-config
                   key: CLUSTER_HEAD_NODE
+            - name: OVATION_CLI_ARGS
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-config
+                  key: OVATION_CLI_ARGS
             - name: PUBSUB_REQUESTS_TOPIC
               valueFrom:
                 configMapKeyRef:
