@@ -22,7 +22,8 @@ def submit_research_job(msg,
                         head_node=None,
                         key_filename=None,
                         host_key_file=None,
-                        ssh_username=None):
+                        ssh_username=None,
+                        ovation_cli_args=None):
     """Handle pubsub message to submit a job.
     :param msg google.cloud.pubsub_v1.subscriber.message.Message
     :returns (job_response, token_info) : job_response as dict, token_info to pass to service.make_session
@@ -66,11 +67,12 @@ def submit_research_job(msg,
         #if stdout.channel.recv_exit_status() != 0:
         #    raise SlurmException(stderr.read())
 
-        cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image}' #TODO add OVATION_CLI_ARGS
+        cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image} {ovation_cli_args}' 
         stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
                                                                token=token,
                                                                activity_id=activity_id,
-                                                               image=image_name))
+                                                               image=image_name,
+                                                               ovation_cli_args=ovation_cli_args))
         if stdout.channel.recv_exit_status() != 0:
             raise SlurmException(stderr.read())
 

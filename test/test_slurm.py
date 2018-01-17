@@ -37,7 +37,8 @@ def test_submit_research_job_should_connect_to_head_node(make_session, ssh_clien
                               head_node=sentinel.head_node,
                               key_filename=sentinel.key_filename,
                               host_key_file=sentinel.host_key_file,
-                              ssh_username=sentinel.username)
+                              ssh_username=sentinel.username,
+                              ovation_cli_args=sentinel.ovation_cli_args)
 
     # Assert
     client.load_host_keys.assert_called_with(sentinel.host_key_file)
@@ -70,16 +71,18 @@ def test_submit_research_job_should_submit_job(make_session, ssh_client):
 
     result = slurm.submit_research_job(msg,
                                        head_node=sentinel.head_node,
-                                       key_filename=sentinel.key_filename)
+                                       key_filename=sentinel.key_filename,
+                                       ovation_cli_args=sentinel.ovation_cli_args)
 
     assert result == (sentinel.job_output, {})
 
     # Assert
     client.exec_command.assert_called_with(
-        '~/bin/{ver}/ovation_core.sh {token} {activity} {image}'.format(ver=hpc_manager.__version__,
+        '~/bin/{ver}/ovation_core.sh {token} {activity} {image} {ovation_cli_args}'.format(ver=hpc_manager.__version__,
                                                                 token=sentinel.token,
                                                                 activity=sentinel.activity_id,
-                                                                image=sentinel.image_name))
+                                                                image=sentinel.image_name,
+                                                                ovation_cli_args=sentinel.ovation_cli_args))
 
 
 @patch('paramiko.SSHClient')

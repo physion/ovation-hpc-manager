@@ -15,10 +15,11 @@ module load singularity/2.4
 API_TOKEN=$1
 ACTIVITY_UUID=$2
 USER_IMAGE=$3
+OVATION_CLI_ARGS=$4
 
 
 export SINGULARITY_BINDPATH="/local:/local"
-/cm/shared/sing-images/ovation/ovation_download_files.img "$API_TOKEN" "$ACTIVITY_UUID"
+/cm/shared/sing-images/ovation/ovation_download_files.img "$API_TOKEN" "$ACTIVITY_UUID" "$OVATION_CLI_ARGS"
 ls /local/ovation/data/$ACTIVITY_UUID/related/
 mkdir /cm/shared/sing-images/ovation/$SLURM_JOB_ID
 chmod 777 /cm/shared/sing-images/ovation/$SLURM_JOB_ID
