@@ -7,8 +7,10 @@ To install:
 helm install --name kube-lego-development stable/kube-lego\
     --namespace development \
     --set config.LEGO_EMAIL=dev@ovation.io \
-    --set config.LEGO_URL=https://acme-staging.api.letsencrypt.org/directory
+    [--set config.LEGO_URL=https://acme-staging.api.letsencrypt.org/directory] # default
 ```
+
+You may need to use `--set rbac.create=true` if RBAC is not already available
 
 For production use
 ```
