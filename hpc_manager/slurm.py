@@ -51,7 +51,7 @@ def submit_research_job(msg,
 
 
     logging.info("Connecting to head node")
-    logging.info("variable:{}".format(ovation_cli_args))
+    
     client = paramiko.SSHClient()
     client.load_host_keys(host_key_file)
     client.connect(head_node,
