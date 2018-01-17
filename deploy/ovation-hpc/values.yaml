@@ -9,8 +9,8 @@ image:
 service:
   name: hpc-manager
   type: NodePort
-  externalPort: 80
-  internalPort: 8000
+  externalPort: 8000
+  internalPort: 80
 ingress:
   enabled: false
   # Used to create an Ingress record.
