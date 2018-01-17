@@ -35,3 +35,5 @@ def receive_messages(project, topic_path, subscription_name):
     while True:
         time.sleep(60)
 
+
+receive_messages('ovation-io', 'compute-failures-development', 'failures_subscription')
