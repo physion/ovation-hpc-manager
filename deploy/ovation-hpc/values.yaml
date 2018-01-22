@@ -1,0 +1,45 @@
+# Default values for ovation-hpc.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+image:
+  repository: gcr.io/ovation-io/hpc-manager
+  tag: stable
+  pullPolicy: IfNotPresent
+service:
+  name: hpc-manager
+  type: NodePort
+  externalPort: 8000
+  internalPort: 8000
+ingress:
+  enabled: false
+  # Used to create an Ingress record.
+  hosts:
+  tls:
+config:
+  GOOGLE_CLOUD_PROJECT_ID: project-id
+  CLUSTER_HEAD_NODE: 10.20.30.98
+  SSH_KEY_FILE: /var/secrets/ssh/id_rsa
+  KNOWN_HOSTS_FILE: /var/secrets/ssh/known_hosts
+  SSH_USERNAME: ortizt
+  OVATION_CLI_ARGS: ""
+secret:
+  GCP_SERVICE_KEY_JSON: json
+  SSH_ID_RSA: text
+  SSH_ID_RSA_PUB: text
+  SSH_KNOWN_HOSTS: text
+#kube-lego:
+#  config:
+#    LEGO_EMAIL: registered-email
+#    LEGO_URL: https://acme-staging.api.letsencrypt.org/directory
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi

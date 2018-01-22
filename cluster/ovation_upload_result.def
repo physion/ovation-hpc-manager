@@ -1,0 +1,24 @@
+BootStrap: docker
+From: ubuntu:16.04
+%post
+	echo "Installing extra packages..."
+    apt-get -y update
+    apt-get -y install python3-pip
+    apt-get update
+    pip3 install ovation==1.23.0
+    pip3 install google-cloud-pubsub==0.29.0
+    mkdir /local
+    chmod 777 /local
+%runscript
+    API_TOKEN=$1
+    ACTIVITY_UUID=$2
+    SECOND_JOB=$3
+    OVATION_CLI_ARGS=$4
+    if [ -s /local/s_aws_err_"$SECOND_JOB".out ]
+    then
+        python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py error -j "$SECOND_JOB" -a "$ACTIVITY_UUID" -e "$(cat /local/s_aws_err_"$SECOND_JOB".out)" || echo "Error to send the message to $PUBSUB_FAILURES_TOPIC"
+    else
+        python3 /local/ovation/hpc-manager/hpc_manager/ovation_delivery.py success -j "$SECOND_JOB" -a "$ACTIVITY_UUID" || echo "Error to send the message to $PUBSUB_SUCCESSES_TOPIC"
+    fi
+
+    python3 -m ovation.cli -t "$API_TOKEN" $OVATION_CLI_ARGS add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/*

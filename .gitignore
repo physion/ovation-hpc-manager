@@ -99,3 +99,13 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# IntelliJ
+.idea
+
+# Configuration
+*.env
+*.orig
+
+# Vendor
+vendor/

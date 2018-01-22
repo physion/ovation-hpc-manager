@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: {{ .Release.Namespace }}
+data:
+  GOOGLE_CLOUD_PROJECT_ID: {{ .Values.config.GOOGLE_CLOUD_PROJECT_ID }}
+  CLUSTER_HEAD_NODE: {{ .Values.config.CLUSTER_HEAD_NODE }}
+  PUBSUB_REQUESTS_TOPIC: {{ .Values.config.PUBSUB_REQUESTS_TOPIC }}
+  PUBSUB_FAILURES_TOPIC: {{ .Values.config.PUBSUB_FAILURES_TOPIC }}
+  PUBSUB_SUCCESSES_TOPIC: {{ .Values.config.PUBSUB_SUCCESSES_TOPIC }}
+  PUBSUB_REQUEST_SUBSCRIPTION_NAME: {{ .Values.config.PUBSUB_REQUEST_SUBSCRIPTION_NAME }}
+  OVATION_AUTH_DOMAIN: {{ .Values.config.OVATION_AUTH_DOMAIN }}
+  OVATION_AUDIENCE: {{ .Values.config.OVATION_AUDIENCE }}
+  OVATION_CLI_ARGS: {{ .Values.config.OVATION_CLI_ARGS }}

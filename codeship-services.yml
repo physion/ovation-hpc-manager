@@ -1,9 +1,23 @@
 version: '2'
 
 services:
-  library:
+  app:
     build:
       image: ovation-hpc-manager
       dockerfile: Dockerfile
     environment:
       - PYTHONPATH=/app
+
+  gcr-dockercfg:
+    image: codeship/gcr-dockercfg-generator
+    add_docker: true
+    encrypted_env_file: google-credentials.encrypted
+
+  gke-deploy:
+    build:
+      image: deploy
+      dockerfile: Dockerfile.deploy
+    encrypted_env_file: google-credentials.encrypted
+    add_docker: true
+    volumes:
+      - ./deploy:/deploy

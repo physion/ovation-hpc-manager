@@ -1,0 +1,28 @@
+#!/bin/bash
+#SBATCH --job-name=s_aws
+#SBATCH --output=s_aws_out_%j.out
+#SBATCH --workdir=/local
+#SBATCH --partition=us-east-1
+#SBATCH --ntasks=1
+#SBATCH --time=10:00
+#SBATCH --mail-user=example@alphacruncher.com
+#SBATCH --mail-type=ALL
+
+module load shared
+module load slurm/17.02.2
+module load singularity/2.4
+
+API_TOKEN=$1
+ACTIVITY_UUID=$2
+USER_IMAGE=$3
+OVATION_CLI_ARGS=$4
+
+
+export SINGULARITY_BINDPATH="/local:/local"
+/cm/shared/sing-images/ovation/ovation_download_files.img "$API_TOKEN" "$ACTIVITY_UUID" "$OVATION_CLI_ARGS"
+ls /local/ovation/data/$ACTIVITY_UUID/related/
+mkdir /cm/shared/sing-images/ovation/$SLURM_JOB_ID
+chmod 777 /cm/shared/sing-images/ovation/$SLURM_JOB_ID
+cp /local/ovation/data/$ACTIVITY_UUID/related/$USER_IMAGE /cm/shared/sing-images/ovation/$SLURM_JOB_ID/$USER_IMAGE
+chmod 777 /cm/shared/sing-images/ovation/$SLURM_JOB_ID/$USER_IMAGE
+rm -rf /local/ovation/data/$ACTIVITY_UUID/outputs/*
