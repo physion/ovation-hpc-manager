@@ -1,4 +1,3 @@
-import base64
 import json
 
 import hpc_manager.pubsub as pubsub

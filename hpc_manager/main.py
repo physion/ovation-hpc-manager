@@ -1,6 +1,5 @@
 import logging
 import sys
-import os
 import hpc_manager.system as system
 import falcon
 

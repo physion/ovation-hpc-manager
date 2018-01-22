@@ -48,8 +48,6 @@ def submit_research_job(msg,
     #                                                      auth=auth_domain,
     #                                                      audience=audience,
     #                                                      api=api)
-
-
     logging.info("Connecting to head node")
     
     client = paramiko.SSHClient()
