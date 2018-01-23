@@ -36,6 +36,14 @@ echo "NAMESPACE = $NAMESPACE"
 echo "RELEASE_NAME = $RELEASE_NAME"
 echo "CI_TIMESTAMP = $CI_TIMESTAMP"
 
+helm delete kube-lego-development-kube-lego
+
+helm-wrapper upgrade --install  --namespace=${NAMESPACE} --timeout 600 --wait \
+    --set image.tag=${NAMESPACE}-${CI_TIMESTAMP} \
+    -f ./deploy/values/${NAMESPACE}/secrets.yaml \
+    ${RELEASE_NAME} \
+    ./deploy/ovation-hpc/
+
 # Make sure kube-lego is available
 helm upgrade --install kube-lego-${NAMESPACE} stable/kube-lego\
     --namespace ${NAMESPACE} \
@@ -43,9 +51,3 @@ helm upgrade --install kube-lego-${NAMESPACE} stable/kube-lego\
     --set config.LEGO_EMAIL='dev@ovation.io' \
     --set config.LEGO_DEFAULT_INGRESS_CLASS="gce" \
     --set rbac.create=true
-
-helm-wrapper upgrade --install  --namespace=${NAMESPACE} --timeout 600 --wait \
-    --set image.tag=${NAMESPACE}-${CI_TIMESTAMP} \
-    -f ./deploy/values/${NAMESPACE}/secrets.yaml \
-    ${RELEASE_NAME} \
-    ./deploy/ovation-hpc/
