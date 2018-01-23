@@ -36,7 +36,7 @@ echo "NAMESPACE = $NAMESPACE"
 echo "RELEASE_NAME = $RELEASE_NAME"
 echo "CI_TIMESTAMP = $CI_TIMESTAMP"
 
-helm delete kube-lego-development-kube-lego
+helm delete kube-lego-development
 
 helm-wrapper upgrade --install  --namespace=${NAMESPACE} --timeout 600 --wait \
     --set image.tag=${NAMESPACE}-${CI_TIMESTAMP} \
