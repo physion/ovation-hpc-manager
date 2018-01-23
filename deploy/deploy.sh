@@ -44,7 +44,7 @@ helm upgrade --install kube-lego-${NAMESPACE} stable/kube-lego\
     --set config.LEGO_DEFAULT_INGRESS_CLASS="gce" \
     --set rbac.create=true
 
-helm-wrapper upgrade --install  --namespace=${NAMESPACE} --timeout 2000 --wait \
+helm-wrapper upgrade --install  --namespace=${NAMESPACE} --timeout 10000 --wait \
     --set image.tag=${NAMESPACE}-${CI_TIMESTAMP} \
     -f ./deploy/values/${NAMESPACE}/secrets.yaml \
     ${RELEASE_NAME} \
