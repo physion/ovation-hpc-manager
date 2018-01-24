@@ -37,7 +37,8 @@ echo "RELEASE_NAME = $RELEASE_NAME"
 echo "CI_TIMESTAMP = $CI_TIMESTAMP"
 
 # Make sure kube-lego is available
-helm delete kube-lego-${NAMESPACE} 
+
+
 
 helm-wrapper upgrade --install --force --namespace=${NAMESPACE} --timeout 600 --wait \
     --set image.tag=${NAMESPACE}-${CI_TIMESTAMP} \
