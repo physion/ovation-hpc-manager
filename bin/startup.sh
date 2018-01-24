@@ -14,7 +14,11 @@ chmod 600 /dev/net/tun
 #sed -i 's/auth-user-pass/auth-user-pass \/etc\/openvpn\/credentials/g' $OVPN_PATH
 openvpn --client --script-security 2 --config $OVPN_PATH --daemon
 
-/app/bin/resolvconf-up.sh
+echo "nameserver 10.20.30.98" > /etc/resolv.conf
+echo "nameserver 10.20.30.2" > /etc/resolv.conf
+echo "nameserver 10.20.30.3" > /etc/resolv.conf
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+echo "search alphacruncher.net" > /etc/resolv.conf
 
 
 # Start HPC manager
