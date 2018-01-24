@@ -24,7 +24,7 @@ gcloud config set compute/zone $DEFAULT_ZONE
 
 # Install helm
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-helm init --upgrade || true
+helm init --upgrade --force-update
 
 # Install helm-secrets
 echo "Installing helm-secrets"
@@ -45,7 +45,7 @@ helm upgrade --install kube-lego-${NAMESPACE} stable/kube-lego\
     --set rbac.create=true
 
 
-helm-wrapper upgrade --install --force --namespace=${NAMESPACE} --timeout 600 --wait \
+helm-wrapper upgrade --install --namespace=${NAMESPACE} --timeout 600 --wait \
     --set image.tag=${NAMESPACE}-${CI_TIMESTAMP} \
     -f ./deploy/values/${NAMESPACE}/secrets.yaml \
     ${RELEASE_NAME} \
