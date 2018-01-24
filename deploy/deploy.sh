@@ -36,7 +36,6 @@ echo "NAMESPACE = $NAMESPACE"
 echo "RELEASE_NAME = $RELEASE_NAME"
 echo "CI_TIMESTAMP = $CI_TIMESTAMP"
 
-helm delete --purge kube-lego-${NAMESPACE}
 
 # Make sure kube-lego is available
 helm upgrade --install kube-lego-${NAMESPACE} stable/kube-lego\
