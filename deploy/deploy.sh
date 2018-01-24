@@ -24,7 +24,7 @@ gcloud config set compute/zone $DEFAULT_ZONE
 
 # Install helm
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
-helm init --upgrade --force-update
+helm init --force-upgrade
 
 # Install helm-secrets
 echo "Installing helm-secrets"
@@ -36,7 +36,7 @@ echo "NAMESPACE = $NAMESPACE"
 echo "RELEASE_NAME = $RELEASE_NAME"
 echo "CI_TIMESTAMP = $CI_TIMESTAMP"
 
-helm delete --purge kube-lego-${NAMESPACE} 
+helm delete --purge kube-lego-${NAMESPACE}
 
 # Make sure kube-lego is available
 helm upgrade --install kube-lego-${NAMESPACE} stable/kube-lego\
