@@ -17,7 +17,7 @@ ACTIVITY_UUID=$2
 SECOND_JOB=$3
 USER_IMAGE=$4
 FIRST_JOB=$5
-OVATION_CLI_ARGS=$4
+OVATION_CLI_ARGS=$6
 
 echo "test upload result"
 chmod 777 /local/s_aws_out_"$SECOND_JOB".out
