@@ -60,13 +60,7 @@ def submit_research_job(msg,
     logging.info("Successful connection")
 
     try:
-        cmd = '~/bin/{ver}/ovation_helper.sh'
-        #stdin, stdout, stderr =
-        client.exec_command(cmd.format(ver=hpc_manager.__version__))
-        #if stdout.channel.recv_exit_status() != 0:
-        #    raise SlurmException(stderr.read())
-
-        cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image} {ovation_cli_args}' 
+        cmd = '~/bin/{ver}/ovation_core.sh {token} {activity_id} {image} {ovation_cli_args}'
         stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
                                                                token=token,
                                                                activity_id=activity_id,
