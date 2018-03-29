@@ -28,10 +28,6 @@ secret:
   SSH_ID_RSA: text
   SSH_ID_RSA_PUB: text
   SSH_KNOWN_HOSTS: text
-#kube-lego:
-#  config:
-#    LEGO_EMAIL: registered-email
-#    LEGO_URL: https://acme-staging.api.letsencrypt.org/directory
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
