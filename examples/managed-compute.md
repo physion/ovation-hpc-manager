@@ -14,7 +14,7 @@ This [Quick Start](https://singularity.lbl.gov/quickstart) can help you get star
 When you run a compute job, the compute service will run your Singularity image. Your image's command should be an executable that takes no arguments. 
 Each compute job is associated with one Activity entity in Ovation. Your executable can read the
 _Inputs_ of the Activity at `/data/inputs` within the image. If you need to pass parameters to your executable,
-add those parameters in an _Input_ file to the activity. The compute service will also make Activity's _Related_ files 
+add those parameters in an _Input_ file to the activity. The compute service will also make Activity's _Associated_ files 
 available at `/data/related` within the image. 
 
 Your image's executable should place outputs into `/data/outputs`. The contents of `/data/outputs`, and
