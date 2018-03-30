@@ -1,30 +1,48 @@
 # Managed Compute
 
 ## Summary
-Ovation supports running compute for Activities using the managed HPC service `https://hpc.ovation.io`. A compute 'job'
-can be run for any Activity that has a compute container image associated with the Activity.
+Ovation supports running compute for any Activity that has an associated compute container image, using the managed HPC service _https://hpc.ovation.io_.
 
-With managed compute, you and your collaborators can: 
+**The Ovation Compute service is currently in BETA.**
 
-- run analyses of data stored within Ovation
-- automatically store analysis results in Ovation
-- track provenance of analyses including inputs, outputs, parameters, and code
+**The Ovation Compute service is NOT covered by the Ovation Business Associate Agreement.**
 
 ## Compute image
-Ovation's HPC service uses [Singularity](https://singularity.lbl.gov/) images to package the executable(s) and dependencies of a computation.
-Each compute job is associated with one Activity entity in Ovation.
+Ovation's compute service uses [Singularity](https://singularity.lbl.gov/) images to package the executable(s) and dependencies of a computation. 
+This [Quick Start](https://singularity.lbl.gov/quickstart) can help you get started creating a Singularity image with your desired compute executable and dependencies. 
 
-If you are new to Singularity and HPC, [Quick Start](https://singularity.lbl.gov/quickstart) will help you get started creating a Singularity image containing your desired compute executable and dependencies.
+When you run a compute job, the compute service will run your Singularity image. Your image's command should be an executable that takes no arguments. 
+Each compute job is associated with one Activity entity in Ovation. Your executable can read the
+_Inputs_ of the Activity at `/data/inputs` within the image. If you need to pass parameters to your executable,
+add those parameters in an _Input_ file to the activity. The compute service will also make Activity's _Related_ files 
+available at `/data/related` within the image. 
 
-Your image's default command should be an executable that takes no arguments. 
+Your image's executable should place outputs into `/data/outputs`. The contents of `/data/outputs`, and
+the stdout and stderr logs from your compute job will be uploaded to the Activity's _Outputs_ upon job completion (or failure).
 
-When you run a compute job, the compute service will call the default command of your Singularity image. The compute service will download the
-_Inputs_ of an Activity to a volume mounted at `/inputs` within the image. If you need to pass parameters to your executable,
-add those parameters in an _Input_ file to the activity. The compute service will also download the Activity's _Related_ files 
-and mount them at `/related` within the image. 
+This simple image definition defines a Singularity image that copies the contents of `/data/inputs/in.txt` to `/data/outputs/out.txt`:
 
-Your image's executable should place outputs into `/outputs`. The contents of `/outputs`, and
-the stdout and stderr logs from your compute job will be uploaded to the Activity's _Outputs_ upon job completion (or failure).   
+```
+BootStrap: docker
+From: ubuntu:16.04
+
+%post
+    # Will be bound to a folder containing:
+    # ./inputs: Contents of Ovation Activity's "inputs"
+    # ./related: Contents of Ovation Activity's "associated files"
+    # ./outputs: Files added here by your job will be uploaded to the Activity's outputs upon job completion
+    mkdir /data
+    chmod 777 /data
+
+    # Un-comment these if you need access to the Ovation Python API from your job:
+    #apt-get -y update && apt-get -y install python3-pip
+    #pip3 install -U ovation
+
+%runscript
+
+    cat /data/inputs/in.txt > /data/outputs/out.txt
+
+```   
 
 ## Activity setup
 You can run a compute job for any `Activity` within Ovation. Any user with access to the Activity and the input file(s)
