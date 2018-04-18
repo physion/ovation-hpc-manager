@@ -5,12 +5,12 @@
 #SBATCH --partition=us-east-1
 #SBATCH --ntasks=1
 #SBATCH --time=10:00
-#SBATCH --mail-user=example@alphacruncher.com
+#SBATCH --mail-user=barry@ovation.io
 #SBATCH --mail-type=ALL
 
 module load shared
-module load slurm/17.02.2
-module load singularity/2.4
+module load slurm
+module load singularity
 
 API_TOKEN=$1
 ACTIVITY_UUID=$2
