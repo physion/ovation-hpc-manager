@@ -63,7 +63,7 @@ spec:
             - name: vpn-settings
               mountPath: /var/secrets/vpn
             - name: env-secrets
-              mountPath: /var/secrents/env
+              mountPath: /var/secrets/env
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
