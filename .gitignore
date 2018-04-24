@@ -110,3 +110,4 @@ ENV/
 # Vendor
 vendor/
 *.simg
+*.img
