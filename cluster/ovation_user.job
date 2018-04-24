@@ -15,9 +15,9 @@ module load singularity
 
 ACTIVITY_UUID=$1
 USER_IMAGE=$2
-FIRST_JOB=$3
+JOB_ID=$3
 
 echo "Running user container $2"
 
 export SINGULARITY_BINDPATH="/local/ovation/data/$ACTIVITY_UUID/:/data"
-/cm/shared/sing-images/ovation/$FIRST_JOB/$USER_IMAGE
+/cm/shared/sing-images/ovation/$JOB_ID/$USER_IMAGE
