@@ -16,7 +16,7 @@ API_TOKEN=$1
 ACTIVITY_UUID=$2
 SECOND_JOB=$3
 USER_IMAGE=$4
-FIRST_JOB=$5
+JOB_ID=$5
 OVATION_CLI_ARGS=$6
 
 echo "test upload result"
@@ -36,5 +36,5 @@ echo "run container"
 echo "exit container"
 
 rm -rf /local/ovation/data/$ACTIVITY_UUID/
-rm /cm/shared/sing-images/ovation/$FIRST_JOB/$USER_IMAGE
-rm -rf /cm/shared/sing-images/ovation/$FIRST_JOB
+rm /cm/shared/sing-images/ovation/$JOB_ID/$USER_IMAGE
+rm -rf /cm/shared/sing-images/ovation/$JOB_ID
