@@ -12,10 +12,11 @@ module load shared
 module load slurm
 module load singularity
 
-API_TOKEN=$1
-ACTIVITY_UUID=$2
-USER_IMAGE=$3
-OVATION_CLI_ARGS=$4
+ORG=$1
+API_TOKEN=$2
+ACTIVITY_UUID=$3
+USER_IMAGE=$4
+OVATION_CLI_ARGS=$5
 
 
 export SINGULARITY_BINDPATH="/local:/local"

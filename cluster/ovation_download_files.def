@@ -9,9 +9,10 @@ From: ubuntu:16.04
     mkdir /local
     chmod 777 /local
 %runscript
-    API_TOKEN=$1
-    ACTIVITY_UUID=$2
-    OVATION_CLI_ARGS=$3
+    ORG=$1
+    API_TOKEN=$2
+    ACTIVITY_UUID=$3
+    OVATION_CLI_ARGS=$4
 	mkdir -p /local/ovation/data/$ACTIVITY_UUID/
-	python3 -m ovation.cli -t "$API_TOKEN" $OVATION_CLI_ARGS download "$ACTIVITY_UUID" --output /local/ovation/data/$ACTIVITY_UUID/
+	python3 -m ovation.cli -t "$API_TOKEN" -o "$ORG" "$OVATION_CLI_ARGS download "$ACTIVITY_UUID" --output /local/ovation/data/$ACTIVITY_UUID/
 
