@@ -20,7 +20,7 @@ OVATION_CLI_ARGS=$5
 
 
 export SINGULARITY_BINDPATH="/local:/local"
-/cm/shared/sing-images/ovation/ovation_download_files.img "$API_TOKEN" "$ACTIVITY_UUID" "$OVATION_CLI_ARGS"
+singularity run /cm/shared/sing-images/ovation/ovation_download_files.img "$ORG" "$API_TOKEN" "$ACTIVITY_UUID" "$OVATION_CLI_ARGS"
 ls /local/ovation/data/$ACTIVITY_UUID/related/
 mkdir /cm/shared/sing-images/ovation/$SLURM_JOB_ID
 chmod 777 /cm/shared/sing-images/ovation/$SLURM_JOB_ID
