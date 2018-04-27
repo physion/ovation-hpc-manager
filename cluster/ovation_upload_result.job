@@ -12,19 +12,20 @@ module load shared
 module load slurm
 module load singularity
 
-API_TOKEN=$1
-ACTIVITY_UUID=$2
-SECOND_JOB=$3
-USER_IMAGE=$4
-JOB_ID=$5
-OVATION_CLI_ARGS=$6
+ORG=$1
+API_TOKEN=$2
+ACTIVITY_UUID=$3
+SECOND_JOB=$4
+USER_IMAGE=$5
+JOB_ID=$6
+OVATION_CLI_ARGS=$7
 
 echo "Copy results"
 chmod 777 /local/s_aws_out_"$SECOND_JOB".out
 
 export GOOGLE_APPLICATION_CREDENTIALS="$HOME/ovation/ovation-hpc-master-service.json"
-export PUBSUB_FAILURES_TOPIC="compute-failures-development"
-export PUBSUB_SUCCESSES_TOPIC="compute-successes-development"
+export PUBSUB_FAILURES_TOPIC="compute-failures-master"
+export PUBSUB_SUCCESSES_TOPIC="compute-successes-master"
 export GOOGLE_CLOUD_PROJECT_ID="ovation-io"
 
 cp /local/s_aws_out_"$SECOND_JOB".out /local/ovation/data/"$ACTIVITY_UUID"/outputs/s_aws_out_"$SECOND_JOB".out
@@ -32,7 +33,7 @@ cp /local/s_aws_out_"$SECOND_JOB".out /local/ovation/data/"$ACTIVITY_UUID"/outpu
 
 export SINGULARITY_BINDPATH="/local/:/local"
 echo "Run container"
-singularity run /cm/shared/sing-images/ovation/ovation_upload_result.img "$API_TOKEN" "$ACTIVITY_UUID" "$SECOND_JOB" "$OVATION_CLI_ARGS"
+singularity run /cm/shared/sing-images/ovation/ovation_upload_result.img "$ORG" "$API_TOKEN" "$ACTIVITY_UUID" "$SECOND_JOB" "$OVATION_CLI_ARGS"
 echo "Container exit"
 
 echo "Cleanup"

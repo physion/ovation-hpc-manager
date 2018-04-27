@@ -23,6 +23,7 @@ def send_result(**args):
 
         message['job_id'] = args.get('job_id')
         message['activity_id'] = args.get('activity_id')
+        message['organization_id'] = args.get('org_id')
         if 'error' in args.get('args'): message['error_log'] = args.get('args').error
 
         data = json.dumps(message)
@@ -46,16 +47,18 @@ def main():
     parser_error = subparsers.add_parser('error', description='Send a error result')
     parser_error.add_argument('-j', '--job_id', help='Job id')
     parser_error.add_argument('-a', '--activity_id', help='Activity id')
+    parser_error.add_argument('-o', '--organization_id', help='Organization id')
     parser_error.add_argument('-e', '--error', help='Error log')
     parser_error.set_defaults(topic=configuration('PUBSUB_FAILURES_TOPIC'))
 
     parser_success = subparsers.add_parser('success', description='Send a success result')
     parser_success.add_argument('-j', '--job_id', help='Job id')
     parser_success.add_argument('-a', '--activity_id', help='Activity id')
+    parser_error.add_argument('-o', '--organization_id', help='Organization id')
     parser_success.set_defaults(topic=configuration('PUBSUB_SUCCESSES_TOPIC'))
 
     args = parser.parse_args()
-    send_result(topic=args.topic, job_id=args.job_id, activity_id=args.activity_id, args=args)
+    send_result(topic=args.topic, org_id=args.org_id, job_id=args.job_id, activity_id=args.activity_id, args=args)
 
 
 if __name__ == '__main__':
