@@ -17,7 +17,7 @@ From: ubuntu:16.04
     SECOND_JOB=$4
     OVATION_CLI_ARGS=$5
 
-    echo -t "<token>" -o "$ORG" add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/*
+    echo -t "<token>" -o "$ORG" add-outputs "$ACTIVITY_UUID" /local/ovation/data/$ACTIVITY_UUID/outputs/*
 
     if [ -s /local/s_aws_err_"$SECOND_JOB".out ]
     then
