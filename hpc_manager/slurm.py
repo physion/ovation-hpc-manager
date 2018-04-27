@@ -61,13 +61,14 @@ def submit_research_job(msg,
 
     try:
         cmd = '~/bin/{ver}/ovation_core.sh {org} {token} {activity_id} {image} {ovation_cli_args}'
-        logging.info("Executing {}".format(cmd))
-        stdin, stdout, stderr = client.exec_command(cmd.format(ver=hpc_manager.__version__,
-                                                               token=token,
-                                                               activity_id=activity_id,
-                                                               image=image_name,
-                                                               org=org,
-                                                               ovation_cli_args=ovation_cli_args))
+        exec_cmd = cmd.format(ver=hpc_manager.__version__,
+                             token=token,
+                             activity_id=activity_id,
+                             image=image_name,
+                             org=org,
+                             ovation_cli_args=ovation_cli_args)
+        logging.info("Executing {}".format(exec_cmd))
+        stdin, stdout, stderr = client.exec_command(exec_cmd)
         if stdout.channel.recv_exit_status() != 0:
             output = stderr.read()
             logging.error("ovation_core.sh failed: {}".format(output))
