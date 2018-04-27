@@ -18,7 +18,7 @@ ACTIVITY_UUID=$3
 USER_IMAGE=$4
 OVATION_CLI_ARGS=$5
 
-
+echo "$ORG" "<token>" "$ACTIVITY_UUID" "$OVATION_CLI_ARGS"
 export SINGULARITY_BINDPATH="/local:/local"
 singularity run /cm/shared/sing-images/ovation/ovation_download_files.img "$ORG" "$API_TOKEN" "$ACTIVITY_UUID" "$OVATION_CLI_ARGS"
 ls /local/ovation/data/$ACTIVITY_UUID/related/

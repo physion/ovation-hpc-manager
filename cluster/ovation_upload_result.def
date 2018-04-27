@@ -17,6 +17,8 @@ From: ubuntu:16.04
     SECOND_JOB=$4
     OVATION_CLI_ARGS=$5
 
+    echo -t "<token>" -o "$ORG" add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/*
+
     if [ -s /local/s_aws_err_"$SECOND_JOB".out ]
     then
         python3 ~/bin/1.0.0/ovation_delivery.py error -j "$SECOND_JOB" -o "$ORG" -a "$ACTIVITY_UUID" -e "$(cat /local/s_aws_err_"$SECOND_JOB".out)" || echo "Error to send the message to $PUBSUB_FAILURES_TOPIC"
@@ -24,4 +26,4 @@ From: ubuntu:16.04
         python3 ~/bin/1.0.0/ovation_delivery.py success -j "$SECOND_JOB" -o "$ORG"  -a "$ACTIVITY_UUID" || echo "Error to send the message to $PUBSUB_SUCCESSES_TOPIC"
     fi
 
-    python3 -m ovation.cli -t "$API_TOKEN" -o "$ORG" $OVATION_CLI_ARGS add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/*
+    python3 -m ovation.cli -t "$API_TOKEN" -o "$ORG" add-outputs "$ACTIVITY_UUID" /local/ovation/data/$ACTIVITY_UUID/outputs/*
