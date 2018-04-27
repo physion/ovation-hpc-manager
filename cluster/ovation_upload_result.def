@@ -11,10 +11,11 @@ From: ubuntu:16.04
     mkdir -p /local
     chmod 777 /local
 %runscript
-    API_TOKEN=$1
-    ACTIVITY_UUID=$2
-    SECOND_JOB=$3
-    OVATION_CLI_ARGS=$4
+    ORG=$1
+    API_TOKEN=$2
+    ACTIVITY_UUID=$3
+    SECOND_JOB=$4
+    OVATION_CLI_ARGS=$5
 
     if [ -s /local/s_aws_err_"$SECOND_JOB".out ]
     then
@@ -23,4 +24,4 @@ From: ubuntu:16.04
         python3 ~/bin/1.0.0/ovation_delivery.py success -j "$SECOND_JOB" -a "$ACTIVITY_UUID" || echo "Error to send the message to $PUBSUB_SUCCESSES_TOPIC"
     fi
 
-    python3 -m ovation.cli -t "$API_TOKEN" $OVATION_CLI_ARGS add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/*
+    python3 -m ovation.cli -t "$API_TOKEN" -o "$ORG" $OVATION_CLI_ARGS add-outputs "$ACTIVITY_UUID" /local/ovation/data/$2/outputs/*
